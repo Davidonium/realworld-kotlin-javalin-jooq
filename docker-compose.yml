@@ -1,0 +1,17 @@
+version: '3'
+
+volumes:
+  realworld-data:
+
+services:
+    db:
+        image: postgres:11.5
+        restart: always
+        ports:
+            - "5444:5432"
+        environment:
+            POSTGRES_USER: rw
+            POSTGRES_PASSWORD: rw
+            POSTGRES_DB: realworld
+        volumes:
+            - realworld-data:/var/lib/postgresql/data
