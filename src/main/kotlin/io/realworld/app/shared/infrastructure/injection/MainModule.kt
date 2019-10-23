@@ -41,6 +41,7 @@ val mainModule = module {
         val app = Javalin.create { config ->
             config.showJavalinBanner = false
             config.enableCorsForAllOrigins()
+            config.contextPath = "/api"
         }
 
         get<Router>().setupRoutes(app)
