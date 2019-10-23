@@ -8,6 +8,6 @@ class Router(
 ) {
 
     fun setupRoutes(app: Javalin) {
-        app.get("/articles", articleListHandler::handle)
+        app.get("/articles/:slug", articleListHandler::handle)
     }
 }

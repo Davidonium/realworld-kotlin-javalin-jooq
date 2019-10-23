@@ -7,9 +7,8 @@ import com.zaxxer.hikari.HikariDataSource
 import io.javalin.Javalin
 import io.javalin.plugin.json.JavalinJackson
 import io.realworld.conduit.shared.infrastructure.router.Router
-import org.jdbi.v3.core.Jdbi
-import org.jdbi.v3.core.kotlin.KotlinPlugin
-import org.jdbi.v3.postgres.PostgresPlugin
+import org.jooq.SQLDialect
+import org.jooq.impl.DSL
 import org.koin.dsl.module
 import javax.sql.DataSource
 
@@ -26,9 +25,7 @@ val mainModule = module {
         }
     }
     single {
-        Jdbi.create(get<DataSource>())
-            .installPlugin(KotlinPlugin())
-            .installPlugin(PostgresPlugin())
+        DSL.using(get<DataSource>(), SQLDialect.POSTGRES)
     }
     single {
         jacksonObjectMapper()
