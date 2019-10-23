@@ -6,7 +6,6 @@ import io.realworld.app.shared.infrastructure.persistence.handled
 import org.jdbi.v3.core.Jdbi
 import org.jdbi.v3.core.kotlin.mapTo
 
-
 class ArticleListHandler(private val db: Jdbi) {
     fun handle(ctx: Context) {
         val articles = db.handled { h ->

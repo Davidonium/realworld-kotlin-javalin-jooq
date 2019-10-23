@@ -2,7 +2,6 @@ package io.realworld.app.article.domain
 
 import java.time.OffsetDateTime
 
-
 data class Article(
     val id: Int,
     val slug: String,

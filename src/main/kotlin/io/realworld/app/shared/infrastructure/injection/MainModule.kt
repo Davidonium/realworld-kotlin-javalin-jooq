@@ -8,12 +8,11 @@ import io.javalin.Javalin
 import io.javalin.plugin.json.JavalinJackson
 import io.realworld.app.shared.infrastructure.api.ArticleListHandler
 import io.realworld.app.shared.infrastructure.router.Router
+import javax.sql.DataSource
 import org.jdbi.v3.core.Jdbi
 import org.jdbi.v3.core.kotlin.KotlinPlugin
 import org.jdbi.v3.postgres.PostgresPlugin
 import org.koin.dsl.module
-import javax.sql.DataSource
-
 
 val mainModule = module {
     single<DataSource> {
