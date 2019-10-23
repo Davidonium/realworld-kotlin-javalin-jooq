@@ -6,7 +6,7 @@
         </encoder>
     </appender>
 
-    <logger name="io.realworld.app" level="debug" additivity="false">
+    <logger name="io.realworld.conduit" level="debug" additivity="false">
         <appender-ref ref="STDOUT"/>
     </logger>
 

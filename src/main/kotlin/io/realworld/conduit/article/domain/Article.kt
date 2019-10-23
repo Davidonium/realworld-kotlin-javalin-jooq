@@ -1,4 +1,4 @@
-package io.realworld.app.article.domain
+package io.realworld.conduit.article.domain
 
 import java.time.OffsetDateTime
 

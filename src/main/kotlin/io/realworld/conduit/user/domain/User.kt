@@ -1,4 +1,4 @@
-package io.realworld.app.user.domain
+package io.realworld.conduit.user.domain
 
 data class User(
     val id: Int,

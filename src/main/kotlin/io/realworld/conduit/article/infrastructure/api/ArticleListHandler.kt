@@ -1,8 +1,8 @@
-package io.realworld.app.shared.infrastructure.api
+package io.realworld.conduit.article.infrastructure.api
 
 import io.javalin.http.Context
-import io.realworld.app.article.domain.Article
-import io.realworld.app.shared.infrastructure.persistence.handled
+import io.realworld.conduit.article.domain.Article
+import io.realworld.conduit.shared.infrastructure.persistence.handled
 import org.jdbi.v3.core.Jdbi
 import org.jdbi.v3.core.kotlin.mapTo
 

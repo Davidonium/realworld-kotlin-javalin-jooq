@@ -1,4 +1,4 @@
-package io.realworld.app.shared.infrastructure.injection
+package io.realworld.conduit.shared.infrastructure.injection
 
 import com.fasterxml.jackson.databind.SerializationFeature
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
@@ -6,13 +6,12 @@ import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.zaxxer.hikari.HikariDataSource
 import io.javalin.Javalin
 import io.javalin.plugin.json.JavalinJackson
-import io.realworld.app.shared.infrastructure.api.ArticleListHandler
-import io.realworld.app.shared.infrastructure.router.Router
-import javax.sql.DataSource
+import io.realworld.conduit.shared.infrastructure.router.Router
 import org.jdbi.v3.core.Jdbi
 import org.jdbi.v3.core.kotlin.KotlinPlugin
 import org.jdbi.v3.postgres.PostgresPlugin
 import org.koin.dsl.module
+import javax.sql.DataSource
 
 val mainModule = module {
     single<DataSource> {
@@ -47,6 +46,5 @@ val mainModule = module {
         get<Router>().setupRoutes(app)
         app
     }
-    single { ArticleListHandler(get()) }
     single { Router(get()) }
 }
