@@ -5,7 +5,7 @@ import io.realworld.conduit.article.domain.ArticleRepository
 
 class ArticleListHandler(private val articleRepository: ArticleRepository) {
     fun handle(ctx: Context) {
-        val article = articleRepository.bySlug(ctx.pathParam("slug"))
-        ctx.json(mapOf("article" to article))
+        val articles = articleRepository.all()
+        ctx.json(mapOf("article" to articles))
     }
 }

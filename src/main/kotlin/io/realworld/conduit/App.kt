@@ -6,6 +6,8 @@ import io.realworld.conduit.shared.infrastructure.injection.mainModule
 import org.koin.core.context.startKoin
 
 fun main() {
+    System.setProperty("user.timezone", "UTC")
+
     val app = startKoin {
         modules(listOf(mainModule, articleModule))
     }

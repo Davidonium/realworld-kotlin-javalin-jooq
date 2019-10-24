@@ -1,3 +1,5 @@
+alter database realworld set timezone to 'utc';
+
 create table if not exists users
 (
     id serial not null
@@ -33,6 +35,9 @@ alter table articles owner to rw;
 
 create index if not exists articles_author_id_index
     on articles (author_id);
+
+create unique index if not exists articles_slug_uindex
+    on articles (slug);
 
 create unique index if not exists users_email_uindex
     on users (email);
