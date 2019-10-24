@@ -55,16 +55,18 @@ configurations {
 dependencies {
     ktlint "com.pinterest:ktlint:$ktlint_version"
 
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
-    implementation "org.koin:koin-core:$koin_version"
-    implementation "com.zaxxer:HikariCP:$hikaricp_version"
     implementation "ch.qos.logback:logback-classic:$logback_version"
-    implementation "org.postgresql:postgresql:$postgres_driver_version"
+    implementation "com.auth0:java-jwt:$auth0_jwt_version"
     implementation "com.fasterxml.jackson.core:jackson-databind:$jackson_version"
     implementation "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jackson_version"
     implementation "com.fasterxml.jackson.module:jackson-module-kotlin:$jackson_version"
+    implementation "com.zaxxer:HikariCP:$hikaricp_version"
     implementation "io.javalin:javalin:$javalin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     implementation "org.jooq:jooq:$jooq_version"
+    implementation "org.koin:koin-core:$koin_version"
+    implementation "org.postgresql:postgresql:$postgres_driver_version"
+
 
     testImplementation "io.mockk:mockk:$mockk_version"
     testImplementation "io.rest-assured:rest-assured:$rest_assured_version"
