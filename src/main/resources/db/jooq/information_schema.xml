@@ -1063,6 +1063,16 @@
         <index>
             <index_catalog></index_catalog>
             <index_schema>public</index_schema>
+            <index_name>articles_slug_uindex</index_name>
+            <table_catalog></table_catalog>
+            <table_schema>public</table_schema>
+            <table_name>articles</table_name>
+            <is_unique>true</is_unique>
+            <comment></comment>
+        </index>
+        <index>
+            <index_catalog></index_catalog>
+            <index_schema>public</index_schema>
             <index_name>comments_article_id_index</index_name>
             <table_catalog></table_catalog>
             <table_schema>public</table_schema>
@@ -1202,6 +1212,17 @@
             <table_schema>public</table_schema>
             <table_name>articles</table_name>
             <column_name>id</column_name>
+            <ordinal_position>1</ordinal_position>
+            <is_descending>false</is_descending>
+        </index_column_usage>
+        <index_column_usage>
+            <index_catalog></index_catalog>
+            <index_schema>public</index_schema>
+            <index_name>articles_slug_uindex</index_name>
+            <table_catalog></table_catalog>
+            <table_schema>public</table_schema>
+            <table_name>articles</table_name>
+            <column_name>slug</column_name>
             <ordinal_position>1</ordinal_position>
             <is_descending>false</is_descending>
         </index_column_usage>
