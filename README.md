@@ -21,6 +21,6 @@ For more information on how to this works with other frontends/backends, head ov
 
 > docker-compose up -d
 
-> ./gradlew generateJooqXmlDatabase generateJooq
+> ./gradlew generateJooq
 
 > ./gradlew run
