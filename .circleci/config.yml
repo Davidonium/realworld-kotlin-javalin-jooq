@@ -13,7 +13,7 @@ jobs:
                       # fallback to using the latest cache if no exact match is found
                       - v1-dependencies-
             # run tests!
-            - run: ./gradlew clean check --continue --console=plain
+            - run: ./gradlew clean generateJooq check --continue --console=plain
             - save_cache:
                   paths:
                       - ~/.m2
