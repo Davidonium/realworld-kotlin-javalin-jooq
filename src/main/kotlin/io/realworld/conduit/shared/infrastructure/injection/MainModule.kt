@@ -7,10 +7,10 @@ import com.zaxxer.hikari.HikariDataSource
 import io.javalin.Javalin
 import io.javalin.plugin.json.JavalinJackson
 import io.realworld.conduit.shared.infrastructure.router.Router
+import javax.sql.DataSource
 import org.jooq.SQLDialect
 import org.jooq.impl.DSL
 import org.koin.dsl.module
-import javax.sql.DataSource
 
 val mainModule = module {
     single<DataSource> {
