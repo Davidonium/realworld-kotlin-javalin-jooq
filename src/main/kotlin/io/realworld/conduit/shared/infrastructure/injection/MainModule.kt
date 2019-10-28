@@ -32,7 +32,7 @@ val mainModule = module {
             .registerModule(JavaTimeModule())
             .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
     }
-    single {
+    single<Javalin> {
         JavalinJackson.configure(get())
         val app = Javalin.create { config ->
             config.showJavalinBanner = false
@@ -43,5 +43,12 @@ val mainModule = module {
         get<Router>().setupRoutes(app)
         app
     }
-    single { Router(get()) }
+    single {
+        Router(
+            get(),
+            get(),
+            get(),
+            get()
+        )
+    }
 }
