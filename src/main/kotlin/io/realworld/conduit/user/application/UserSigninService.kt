@@ -5,7 +5,6 @@ import io.realworld.conduit.user.domain.TokenCreator
 import io.realworld.conduit.user.domain.UserRepository
 import io.realworld.conduit.user.domain.exception.InvalidSigninException
 
-
 class UserSigninService(
     private val users: UserRepository,
     private val passwordHasher: PasswordHasher,
