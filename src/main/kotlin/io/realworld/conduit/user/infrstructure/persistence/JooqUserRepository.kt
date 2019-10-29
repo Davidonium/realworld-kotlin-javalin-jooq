@@ -48,6 +48,7 @@ class JooqUserRepository(private val db: DSLContext) : UserRepository {
                 .set(USERS.IMAGE, user.image)
                 .set(USERS.TOKEN, user.token)
                 .where(USERS.ID.eq(user.id.value))
+                .execute()
         }
     }
 }
