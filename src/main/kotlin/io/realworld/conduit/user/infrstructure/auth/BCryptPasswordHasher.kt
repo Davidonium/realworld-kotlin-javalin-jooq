@@ -3,7 +3,6 @@ package io.realworld.conduit.user.infrstructure.auth
 import at.favre.lib.crypto.bcrypt.BCrypt
 import io.realworld.conduit.user.domain.PasswordHasher
 
-
 class BCryptPasswordHasher : PasswordHasher {
 
     private val verifier = BCrypt.verifyer()

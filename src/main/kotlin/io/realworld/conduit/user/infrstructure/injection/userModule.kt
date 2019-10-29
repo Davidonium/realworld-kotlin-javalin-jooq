@@ -31,5 +31,5 @@ val userModule = module {
     }
     single { AuthenticationAccessManager(get()) }
     single<PasswordHasher> { BCryptPasswordHasher() }
-    single { UserSignupService(get(), get(), get())}
+    single { UserSignupService(get(), get(), get()) }
 }

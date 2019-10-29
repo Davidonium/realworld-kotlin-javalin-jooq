@@ -7,7 +7,6 @@ import io.realworld.conduit.user.domain.User
 import io.realworld.conduit.user.domain.UserId
 import io.realworld.conduit.user.domain.UserRepository
 
-
 class UserSignupService(
     private val users: UserRepository,
     private val tokenCreator: TokenCreator,
@@ -34,7 +33,6 @@ class UserSignupService(
         val userWithToken = newUser.copy(token = token)
 
         users.update(userWithToken)
-
 
         return UserResponse(
             email = userWithToken.email,
