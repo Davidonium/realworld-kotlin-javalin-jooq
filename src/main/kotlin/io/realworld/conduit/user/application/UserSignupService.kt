@@ -1,6 +1,5 @@
 package io.realworld.conduit.user.application
 
-import io.javalin.http.BadRequestResponse
 import io.realworld.conduit.user.domain.PasswordHasher
 import io.realworld.conduit.user.domain.TokenCreator
 import io.realworld.conduit.user.domain.User

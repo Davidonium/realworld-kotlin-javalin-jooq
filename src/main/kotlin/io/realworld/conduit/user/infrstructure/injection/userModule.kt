@@ -5,7 +5,6 @@ import com.auth0.jwt.algorithms.Algorithm
 import com.auth0.jwt.interfaces.JWTVerifier
 import io.realworld.conduit.user.application.UserSigninService
 import io.realworld.conduit.user.application.UserSignupService
-import io.realworld.conduit.user.application.ViewCurrentUserRequest
 import io.realworld.conduit.user.application.ViewCurrentUserService
 import io.realworld.conduit.user.domain.PasswordHasher
 import io.realworld.conduit.user.domain.TokenCreator
