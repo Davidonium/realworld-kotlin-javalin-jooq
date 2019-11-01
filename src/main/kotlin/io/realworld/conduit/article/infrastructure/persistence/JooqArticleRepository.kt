@@ -10,17 +10,17 @@ class JooqArticleRepository(private val ctx: DSLContext) : ArticleRepository {
     override fun bySlug(slug: String): Article? {
         return ctx.select()
             .from(ARTICLES)
-            .fetchOne(::mapArticle)
+            .fetchOne(::articleFromRecord)
     }
 
     override fun all(): List<Article> {
         return ctx.select()
             .from(ARTICLES)
-            .fetch(::mapArticle)
+            .fetch(::articleFromRecord)
     }
 }
 
-private fun mapArticle(r: Record): Article {
+private fun articleFromRecord(r: Record): Article {
     return Article(
         id = r[ARTICLES.ID],
         slug = r[ARTICLES.SLUG],
