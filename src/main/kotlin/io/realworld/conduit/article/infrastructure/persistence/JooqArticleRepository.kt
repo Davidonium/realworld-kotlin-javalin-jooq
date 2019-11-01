@@ -8,15 +8,15 @@ import org.jooq.Record
 
 class JooqArticleRepository(private val ctx: DSLContext) : ArticleRepository {
     override fun bySlug(slug: String): Article? {
-        return ctx.use { c ->
-            c.select().from(ARTICLES).fetch(::mapArticle).firstOrNull()
-        }
+        return ctx.select()
+            .from(ARTICLES)
+            .fetchOne(::mapArticle)
     }
 
     override fun all(): List<Article> {
-        return ctx.use { c ->
-            c.select().from(ARTICLES).fetch(::mapArticle)
-        }
+        return ctx.select()
+            .from(ARTICLES)
+            .fetch(::mapArticle)
     }
 }
 
