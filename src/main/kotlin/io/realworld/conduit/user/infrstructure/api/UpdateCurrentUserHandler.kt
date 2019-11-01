@@ -5,7 +5,6 @@ import io.realworld.conduit.user.application.UpdateCurrentUserService
 import io.realworld.conduit.user.application.UpdateUserRequestBody
 import io.realworld.conduit.user.application.UserResponseBody
 
-
 class UpdateCurrentUserHandler(private val updateCurrentUserService: UpdateCurrentUserService) {
     fun handle(ctx: Context) {
         val request = ctx.bodyValidator<UpdateUserRequestBody>().get()

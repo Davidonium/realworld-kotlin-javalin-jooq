@@ -3,7 +3,6 @@ package io.realworld.conduit.user.application
 import io.realworld.conduit.user.domain.UserId
 import io.realworld.conduit.user.domain.UserRepository
 
-
 class UpdateCurrentUserService(private val users: UserRepository) {
     fun execute(currentUserId: UserId, request: UpdateUserRequest): UserResponse {
         val user = users.byId(currentUserId)
@@ -17,5 +16,4 @@ class UpdateCurrentUserService(private val users: UserRepository) {
         users.update(updatedUser)
         return UserResponse.fromUser(updatedUser)
     }
-
 }
