@@ -1,10 +1,10 @@
-package io.realworld.conduit.user.infrstructure.auth
+package io.realworld.conduit.user.infrastructure.auth
 
 import com.auth0.jwt.JWT
 import com.auth0.jwt.algorithms.Algorithm
 import io.realworld.conduit.user.domain.TokenCreator
 import io.realworld.conduit.user.domain.UserId
-import io.realworld.conduit.user.infrstructure.api.Roles
+import io.realworld.conduit.user.infrastructure.api.Roles
 import java.time.Instant
 import java.time.temporal.ChronoUnit
 import java.util.Date

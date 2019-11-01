@@ -1,4 +1,4 @@
-package io.realworld.conduit.user.infrstructure.api
+package io.realworld.conduit.user.infrastructure.api
 
 import io.javalin.core.security.AccessManager
 import io.javalin.core.security.Role

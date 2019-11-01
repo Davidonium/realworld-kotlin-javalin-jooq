@@ -1,4 +1,4 @@
-package io.realworld.conduit.user.infrstructure.auth
+package io.realworld.conduit.user.infrastructure.auth
 
 import at.favre.lib.crypto.bcrypt.BCrypt
 import io.realworld.conduit.user.domain.PasswordHasher

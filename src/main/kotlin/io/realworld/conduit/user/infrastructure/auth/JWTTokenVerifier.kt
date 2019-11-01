@@ -1,4 +1,4 @@
-package io.realworld.conduit.user.infrstructure.auth
+package io.realworld.conduit.user.infrastructure.auth
 
 import com.auth0.jwt.interfaces.JWTVerifier
 import io.realworld.conduit.user.domain.TokenMetadata

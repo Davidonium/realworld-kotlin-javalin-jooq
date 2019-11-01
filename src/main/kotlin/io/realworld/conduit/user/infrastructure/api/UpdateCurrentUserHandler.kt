@@ -1,4 +1,4 @@
-package io.realworld.conduit.user.infrstructure.api
+package io.realworld.conduit.user.infrastructure.api
 
 import io.javalin.http.Context
 import io.realworld.conduit.user.application.UpdateCurrentUserService

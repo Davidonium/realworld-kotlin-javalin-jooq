@@ -1,4 +1,4 @@
-package io.realworld.conduit.user.infrstructure.persistence
+package io.realworld.conduit.user.infrastructure.persistence
 
 import io.realworld.conduit.generated.database.Tables.USERS
 import io.realworld.conduit.user.domain.User
