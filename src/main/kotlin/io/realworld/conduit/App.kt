@@ -10,6 +10,7 @@ fun main() {
     System.setProperty("user.timezone", "UTC")
 
     val app = startKoin {
+        fileProperties()
         modules(listOf(mainModule, articleModule, userModule))
     }
     app.koin.get<Javalin>().start()

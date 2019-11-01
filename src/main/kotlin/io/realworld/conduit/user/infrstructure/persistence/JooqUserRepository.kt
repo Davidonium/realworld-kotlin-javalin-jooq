@@ -5,24 +5,25 @@ import io.realworld.conduit.user.domain.User
 import io.realworld.conduit.user.domain.UserId
 import io.realworld.conduit.user.domain.UserRepository
 import org.jooq.DSLContext
+import org.jooq.Record
 
 class JooqUserRepository(private val db: DSLContext) : UserRepository {
+
+    override fun byId(userId: UserId): User {
+        return db.use { ctx ->
+            ctx.select()
+                .from(USERS)
+                .where(USERS.ID.eq(userId.value))
+                .fetchOne(::userFromRecord)
+        }
+    }
+
     override fun byEmail(email: String): User? {
         return db.use { ctx ->
             ctx.select()
                 .from(USERS)
                 .where(USERS.EMAIL.eq(email))
-                .fetchOne {
-                    User(
-                        id = UserId(it[USERS.ID]),
-                        username = it[USERS.USERNAME],
-                        email = it[USERS.EMAIL],
-                        password = it[USERS.PASSWORD],
-                        token = it[USERS.TOKEN],
-                        bio = it[USERS.BIO],
-                        image = it[USERS.IMAGE]
-                    )
-                }
+                .fetchOne(::userFromRecord)
         }
     }
 
@@ -52,3 +53,14 @@ class JooqUserRepository(private val db: DSLContext) : UserRepository {
         }
     }
 }
+
+private fun userFromRecord(r: Record) =
+    User(
+        id = UserId(r[USERS.ID]),
+        username = r[USERS.USERNAME],
+        email = r[USERS.EMAIL],
+        password = r[USERS.PASSWORD],
+        token = r[USERS.TOKEN],
+        bio = r[USERS.BIO],
+        image = r[USERS.IMAGE]
+    )

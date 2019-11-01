@@ -23,12 +23,6 @@ class UserSigninService(
         val userWithToken = user.copy(token = token)
         users.update(userWithToken)
 
-        return UserResponse(
-            email = userWithToken.email,
-            token = userWithToken.mustHaveToken(),
-            username = userWithToken.username,
-            bio = userWithToken.bio,
-            image = userWithToken.image
-        )
+        return UserResponse.fromUser(userWithToken)
     }
 }

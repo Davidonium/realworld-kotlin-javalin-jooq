@@ -1,0 +1,17 @@
+package io.realworld.conduit.user.infrstructure.api
+
+import io.javalin.http.Context
+import io.realworld.conduit.user.application.UserResponseBody
+import io.realworld.conduit.user.application.ViewCurrentUserRequest
+import io.realworld.conduit.user.application.ViewCurrentUserService
+import io.realworld.conduit.user.domain.UserId
+
+
+class CurrentUserHandler(private val viewCurrentUserService: ViewCurrentUserService) {
+    fun handle(ctx: Context) {
+        val request = ViewCurrentUserRequest(userId = ctx.attribute<UserId>("userId")!!)
+        val response = viewCurrentUserService.execute(request)
+
+        ctx.json(UserResponseBody(user = response))
+    }
+}

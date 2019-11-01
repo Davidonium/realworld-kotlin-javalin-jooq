@@ -6,6 +6,7 @@ import io.realworld.conduit.user.domain.TokenCreator
 import io.realworld.conduit.user.domain.User
 import io.realworld.conduit.user.domain.UserId
 import io.realworld.conduit.user.domain.UserRepository
+import io.realworld.conduit.user.domain.exception.UserAlreadyExistsException
 
 class UserSignupService(
     private val users: UserRepository,
@@ -16,7 +17,7 @@ class UserSignupService(
         val previousUser = users.byEmail(request.email)
 
         if (previousUser != null) {
-            throw BadRequestResponse("Already existing user")
+            throw UserAlreadyExistsException()
         }
 
         val password = passwordHasher.hash(request.password)
@@ -34,12 +35,6 @@ class UserSignupService(
 
         users.update(userWithToken)
 
-        return UserResponse(
-            email = userWithToken.email,
-            username = userWithToken.username,
-            image = userWithToken.image,
-            bio = userWithToken.bio,
-            token = userWithToken.mustHaveToken()
-        )
+        return UserResponse.fromUser(userWithToken)
     }
 }

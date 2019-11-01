@@ -5,11 +5,14 @@ import com.auth0.jwt.algorithms.Algorithm
 import com.auth0.jwt.interfaces.JWTVerifier
 import io.realworld.conduit.user.application.UserSigninService
 import io.realworld.conduit.user.application.UserSignupService
+import io.realworld.conduit.user.application.ViewCurrentUserRequest
+import io.realworld.conduit.user.application.ViewCurrentUserService
 import io.realworld.conduit.user.domain.PasswordHasher
 import io.realworld.conduit.user.domain.TokenCreator
 import io.realworld.conduit.user.domain.TokenVerifier
 import io.realworld.conduit.user.domain.UserRepository
 import io.realworld.conduit.user.infrstructure.api.AuthenticationAccessManager
+import io.realworld.conduit.user.infrstructure.api.CurrentUserHandler
 import io.realworld.conduit.user.infrstructure.api.UserSigninHandler
 import io.realworld.conduit.user.infrstructure.api.UserSignupHandler
 import io.realworld.conduit.user.infrstructure.auth.BCryptPasswordHasher
@@ -21,6 +24,7 @@ import org.koin.dsl.module
 val userModule = module {
     single { UserSignupHandler(get()) }
     single { UserSigninHandler(get()) }
+    single { CurrentUserHandler(get()) }
     single<UserRepository> { JooqUserRepository(get()) }
     single<TokenVerifier> { JWTTokenVerifier(get()) }
     single<TokenCreator> { JWTTokenCreator(get()) }
@@ -34,4 +38,5 @@ val userModule = module {
     single<PasswordHasher> { BCryptPasswordHasher() }
     single { UserSignupService(get(), get(), get()) }
     single { UserSigninService(get(), get(), get()) }
+    single { ViewCurrentUserService(get()) }
 }
