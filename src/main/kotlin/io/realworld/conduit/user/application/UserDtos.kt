@@ -48,3 +48,15 @@ data class UserSignupRequest(
 data class ViewCurrentUserRequest(
     val userId: UserId
 )
+
+data class UpdateUserRequestBody(
+    val user: UpdateUserRequest
+)
+
+data class UpdateUserRequest(
+    val email: String,
+    val token: String,
+    val username: String,
+    val bio: String?,
+    val image: String?
+)

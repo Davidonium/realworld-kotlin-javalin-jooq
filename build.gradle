@@ -54,8 +54,6 @@ configurations {
 }
 
 dependencies {
-    ktlint "com.pinterest:ktlint:$ktlint_version"
-
     implementation "at.favre.lib:bcrypt:$bcrypt_version"
     implementation "ch.qos.logback:logback-classic:$logback_version"
     implementation "com.auth0:java-jwt:$auth0_jwt_version"
@@ -69,14 +67,14 @@ dependencies {
     implementation "org.koin:koin-core:$koin_version"
     implementation "org.postgresql:postgresql:$postgres_driver_version"
 
-
-
     testImplementation "io.mockk:mockk:$mockk_version"
     testImplementation "io.rest-assured:rest-assured:$rest_assured_version"
     testImplementation "io.rest-assured:kotlin-extensions:$rest_assured_version"
     testImplementation "org.jetbrains.kotlin:kotlin-test-junit5:$kotlin_version"
     testImplementation "org.testcontainers:postgresql:$testcontainers_postgresql_version"
     testImplementation "org.junit.jupiter:junit-jupiter:$junit_version"
+
+    ktlint "com.pinterest:ktlint:$ktlint_version"
 }
 
 compileKotlin {
@@ -91,11 +89,9 @@ jar {
     from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
 }
 
-
 test {
     useJUnitPlatform()
 }
-
 
 def outputDir = "${project.buildDir}/reports/ktlint/"
 def inputFiles = project.fileTree(dir: "src", include: "**/*.kt")
