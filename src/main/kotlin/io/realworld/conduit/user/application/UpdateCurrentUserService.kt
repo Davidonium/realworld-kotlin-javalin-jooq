@@ -10,7 +10,6 @@ class UpdateCurrentUserService(private val users: UserRepository) {
 
         val updatedUser = user.copy(
             email = request.email,
-            token = request.token,
             username = request.username,
             bio = request.bio,
             image = request.image
