@@ -7,7 +7,7 @@ import io.realworld.conduit.user.application.ViewCurrentUserService
 
 class CurrentUserHandler(private val viewCurrentUserService: ViewCurrentUserService) {
     fun handle(ctx: Context) {
-        val request = ViewCurrentUserRequest(userId = ctx.currentUserId())
+        val request = ViewCurrentUserRequest(userId = ctx.requireCurrentUserId())
         val response = viewCurrentUserService.execute(request)
         ctx.json(UserResponseBody(user = response))
     }

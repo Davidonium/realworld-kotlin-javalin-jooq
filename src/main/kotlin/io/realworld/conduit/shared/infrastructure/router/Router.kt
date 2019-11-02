@@ -7,6 +7,7 @@ import io.javalin.apibuilder.ApiBuilder.post
 import io.javalin.apibuilder.ApiBuilder.put
 import io.javalin.core.security.SecurityUtil.roles
 import io.realworld.conduit.article.infrastructure.api.ArticleListHandler
+import io.realworld.conduit.profile.infrastructure.api.ProfileHandler
 import io.realworld.conduit.user.infrastructure.api.AuthenticationAccessManager
 import io.realworld.conduit.user.infrastructure.api.CurrentUserHandler
 import io.realworld.conduit.user.infrastructure.api.Roles
@@ -18,10 +19,14 @@ import org.koin.core.inject
 
 class Router : KoinComponent {
     private val authenticationAccessManager: AuthenticationAccessManager by inject()
+
     private val userSignupHandler: UserSignupHandler by inject()
     private val userSigninHandler: UserSigninHandler by inject()
     private val currentUserHandler: CurrentUserHandler by inject()
     private val updateCurrentUserHandler: UpdateCurrentUserHandler by inject()
+
+    private val profileHandler: ProfileHandler by inject()
+
     private val articleListHandler: ArticleListHandler by inject()
 
     fun setupRoutes(app: Javalin) {
@@ -33,6 +38,9 @@ class Router : KoinComponent {
                 post("/login", userSigninHandler::handle, roles(Roles.ANYONE))
                 get(currentUserHandler::handle, roles(Roles.AUTH))
                 put(updateCurrentUserHandler::handle, roles(Roles.AUTH))
+            }
+            path("/profiles/:username") {
+                get(profileHandler::handle, roles(Roles.ANYONE))
             }
         }
     }

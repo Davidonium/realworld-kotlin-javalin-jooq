@@ -25,10 +25,10 @@ class JooqUserRepository(private val ctx: DSLContext) : UserRepository {
 
     override fun insert(user: User): User {
         val id = ctx.insertInto(USERS)
-            .set(USERS.EMAIL, user.email)
-            .set(USERS.USERNAME, user.username)
-            .set(USERS.TOKEN, user.token)
-            .set(USERS.PASSWORD, user.password)
+                .set(USERS.EMAIL, user.email)
+                .set(USERS.USERNAME, user.username)
+                .set(USERS.TOKEN, user.token)
+                .set(USERS.PASSWORD, user.password)
             .returning(USERS.ID)
             .fetchOne()[USERS.ID]
 
@@ -37,10 +37,10 @@ class JooqUserRepository(private val ctx: DSLContext) : UserRepository {
 
     override fun update(user: User) {
         ctx.update(USERS)
-            .set(USERS.USERNAME, user.username)
-            .set(USERS.BIO, user.bio)
-            .set(USERS.IMAGE, user.image)
-            .set(USERS.TOKEN, user.token)
+                .set(USERS.USERNAME, user.username)
+                .set(USERS.BIO, user.bio)
+                .set(USERS.IMAGE, user.image)
+                .set(USERS.TOKEN, user.token)
             .where(USERS.ID.eq(user.id.value))
             .execute()
     }

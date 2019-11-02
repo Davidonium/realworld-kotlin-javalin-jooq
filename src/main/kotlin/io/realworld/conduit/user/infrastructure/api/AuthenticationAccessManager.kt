@@ -27,7 +27,9 @@ class AuthenticationAccessManager(private val tokenVerifier: TokenVerifier) : Ac
             Roles.valueOf(it.role)
         } ?: Roles.ANYONE
 
-        if (!permittedRoles.contains(role)) {
+        val isPublic = permittedRoles.size == 1 && permittedRoles.first() == Roles.ANYONE
+
+        if (!isPublic && !permittedRoles.contains(role)) {
             throw ForbiddenResponse()
         }
 

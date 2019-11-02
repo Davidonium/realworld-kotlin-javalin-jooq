@@ -3,7 +3,7 @@ package io.realworld.conduit.user.domain
 import io.realworld.conduit.user.domain.exception.MissingTokenException
 
 data class UserId(val value: Int? = null) {
-    fun getValue(): Int {
+    fun requiredValue(): Int {
         return value!!
     }
 }
