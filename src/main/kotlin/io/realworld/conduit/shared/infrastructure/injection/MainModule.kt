@@ -6,6 +6,7 @@ import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.zaxxer.hikari.HikariDataSource
 import io.javalin.Javalin
 import io.javalin.plugin.json.JavalinJackson
+import io.realworld.conduit.shared.infrastructure.api.ExceptionMapper
 import io.realworld.conduit.shared.infrastructure.router.Router
 import javax.sql.DataSource
 import org.jooq.SQLDialect
@@ -34,16 +35,15 @@ val mainModule = module {
     }
     single<Javalin> {
         JavalinJackson.configure(get())
-        val app = Javalin.create { config ->
+        Javalin.create { config ->
             config.showJavalinBanner = false
             config.enableCorsForAllOrigins()
             config.contextPath = "/api"
+        }.also {
+            get<Router>().setupRoutes(it)
+            get<ExceptionMapper>().map(it)
         }
-
-        get<Router>().setupRoutes(app)
-        app
     }
-    single {
-        Router()
-    }
+    single { Router() }
+    single { ExceptionMapper() }
 }

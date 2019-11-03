@@ -1,5 +1,5 @@
 package io.realworld.conduit.profile.domain.exception
 
-import io.realworld.conduit.shared.domain.ConduitException
+import io.realworld.conduit.shared.domain.ResourceNotFoundException
 
-class ProfileNotFoundException : ConduitException("Profile was not found")
+class ProfileNotFoundException : ResourceNotFoundException("Profile was not found")
