@@ -4,7 +4,6 @@ import io.javalin.Javalin
 import io.realworld.conduit.shared.domain.ResourceNotFoundException
 import org.eclipse.jetty.http.HttpStatus
 
-
 class ExceptionMapper {
     fun map(app: Javalin) {
         app.exception(Exception::class.java) { e, ctx ->
@@ -35,7 +34,6 @@ class ExceptionMapper {
         }
     }
 }
-
 
 private data class ApiError(
     val status: String,
