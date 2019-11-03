@@ -16,9 +16,9 @@ import org.koin.dsl.module
 val mainModule = module {
     single<DataSource> {
         HikariDataSource().apply {
-            jdbcUrl = getProperty("db_url")
-            username = getProperty("db_user")
-            password = getProperty("db_password")
+            jdbcUrl = getProperty("DB_URL")
+            username = getProperty("DB_USER")
+            password = getProperty("DB_PASSWORD")
             driverClassName = "org.postgresql.Driver"
             addDataSourceProperty("cachePrepStmts", "true")
             addDataSourceProperty("prepStmtCacheSize", "250")
@@ -42,6 +42,8 @@ val mainModule = module {
         }.also {
             get<Router>().setupRoutes(it)
             get<ExceptionMapper>().map(it)
+
+            it.server()?.serverPort = getProperty("APP_PORT")
         }
     }
     single { Router() }
