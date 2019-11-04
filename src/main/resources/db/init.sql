@@ -1,3 +1,5 @@
+create database realworld;
+
 alter database realworld set timezone to 'utc';
 
 create table if not exists users
@@ -12,8 +14,6 @@ create table if not exists users
     bio text,
     image text
 );
-
-alter table users owner to rw;
 
 create table if not exists articles
 (
@@ -30,8 +30,6 @@ create table if not exists articles
         constraint articles_users_id_fk
             references users
 );
-
-alter table articles owner to rw;
 
 create index if not exists articles_author_id_index
     on articles (author_id);
@@ -61,8 +59,6 @@ create table if not exists comments
             references articles
 );
 
-alter table comments owner to rw;
-
 create index if not exists comments_article_id_index
     on comments (article_id);
 
@@ -77,8 +73,6 @@ create table if not exists tags
     name text not null
 );
 
-alter table tags owner to rw;
-
 create table if not exists favorited_articles
 (
     article_id integer not null
@@ -90,8 +84,6 @@ create table if not exists favorited_articles
         constraint favorited_articles_users_id_fk
             references users
 );
-
-alter table favorited_articles owner to rw;
 
 create index if not exists favorited_articles_article_id_index
     on favorited_articles (article_id);
@@ -111,8 +103,6 @@ create table if not exists article_to_tag
             references tags
 );
 
-alter table article_to_tag owner to rw;
-
 create table if not exists follows
 (
     from_user_id integer not null
@@ -124,5 +114,3 @@ create table if not exists follows
         constraint follows_users_id_fk_2
             references users
 );
-
-alter table follows owner to rw;
