@@ -1,6 +1,5 @@
 package io.realworld.conduit.test
 
-import io.javalin.Javalin
 import io.realworld.conduit.App
 import io.restassured.RestAssured
 import org.junit.jupiter.api.extension.AfterAllCallback

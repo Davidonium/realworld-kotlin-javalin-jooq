@@ -5,9 +5,9 @@ import io.realworld.conduit.article.infrastructure.injection.articleModule
 import io.realworld.conduit.profile.infrastructure.injection.profileModule
 import io.realworld.conduit.shared.infrastructure.injection.mainModule
 import io.realworld.conduit.user.infrastructure.injection.userModule
+import javax.sql.DataSource
 import org.koin.core.context.startKoin
 import org.koin.core.context.stopKoin
-import javax.sql.DataSource
 
 fun main() {
     App().start()
