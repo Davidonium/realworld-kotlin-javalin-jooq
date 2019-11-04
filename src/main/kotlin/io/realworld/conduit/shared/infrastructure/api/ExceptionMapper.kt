@@ -19,7 +19,7 @@ class ExceptionMapper {
             ))
         }
 
-        app.exception(ResourceNotFoundException::class.java) { e, ctx ->
+        app.exception(ResourceNotFoundException::class.java) { _, ctx ->
             val error = HttpStatus.Code.NOT_FOUND
             ctx.status(error.code)
             ctx.json(ApiError(
