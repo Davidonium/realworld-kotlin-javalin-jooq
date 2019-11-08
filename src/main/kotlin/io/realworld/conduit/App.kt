@@ -19,7 +19,7 @@ class App(
 ) {
 
     private val container = startKoin {
-        fileProperties()
+        fileProperties("/application.properties")
         environmentProperties()
         properties(properties)
         modules(listOf(

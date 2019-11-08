@@ -3,4 +3,4 @@
 out
 build
 src/main/generated
-koin.properties
+application.properties
