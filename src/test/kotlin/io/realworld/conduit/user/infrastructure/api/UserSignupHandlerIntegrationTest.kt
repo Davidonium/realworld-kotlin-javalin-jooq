@@ -30,5 +30,4 @@ class UserSignupHandlerIntegrationTest {
             spec(expectJsonResponse())
         }
     }
-
 }

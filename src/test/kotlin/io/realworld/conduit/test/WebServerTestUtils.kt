@@ -1,6 +1,5 @@
 package io.realworld.conduit.test
 
-import io.realworld.conduit.user.application.UserResponse
 import io.restassured.builder.RequestSpecBuilder
 import io.restassured.builder.ResponseSpecBuilder
 import io.restassured.module.kotlin.extensions.Extract
@@ -9,7 +8,6 @@ import io.restassured.module.kotlin.extensions.Then
 import io.restassured.module.kotlin.extensions.When
 import io.restassured.specification.RequestSpecification
 import io.restassured.specification.ResponseSpecification
-
 
 fun jsonRequest(): RequestSpecification {
     return RequestSpecBuilder()
@@ -23,7 +21,6 @@ fun expectJsonResponse(): ResponseSpecification {
         .expectContentType("application/json")
         .build()
 }
-
 
 fun withDefaultUser(): TestUser {
     return createUser("david", "test.email@gmail.com", "123")
@@ -54,7 +51,6 @@ fun createUser(username: String, email: String, password: String): TestUser {
 
     return userResponseBody.user
 }
-
 
 data class TestUserResponse(
     val user: TestUser

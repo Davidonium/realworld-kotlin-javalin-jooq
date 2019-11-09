@@ -25,4 +25,17 @@ class FollowProfileHandlerIntegrationTest {
             statusCode(200)
         }
     }
+
+    @Test
+    fun `following a non existent user returns 404`() {
+        val user = withDefaultUser()
+
+        Given {
+            header("Authorization", "Token ${user.token}")
+        } When {
+            post("/api/profiles/thisuserdoesnotexist/follow")
+        } Then {
+            statusCode(404)
+        }
+    }
 }
