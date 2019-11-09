@@ -2,7 +2,6 @@ package io.realworld.conduit.test
 
 import io.realworld.conduit.App
 import io.restassured.RestAssured
-import org.junit.jupiter.api.extension.AfterAllCallback
 import org.junit.jupiter.api.extension.BeforeAllCallback
 import org.junit.jupiter.api.extension.ExtensionContext
 import org.junit.jupiter.api.extension.ExtensionContext.Namespace
@@ -34,7 +33,6 @@ class WebServerExtension : BeforeAllCallback {
 
             app
         }
-
     }
 
     private fun rootStore(context: ExtensionContext): Store {

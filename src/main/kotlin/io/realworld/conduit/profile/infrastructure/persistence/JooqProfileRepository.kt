@@ -38,6 +38,7 @@ class JooqProfileRepository(private val ctx: DSLContext) : ProfileRepository {
 
 fun profileFromRecord(r: Record): Profile {
     return Profile(
+        id = UserId(r[USERS.ID]),
         username = r[USERS.USERNAME],
         bio = r[USERS.BIO],
         image = r[USERS.IMAGE],
