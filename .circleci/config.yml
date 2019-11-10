@@ -2,6 +2,9 @@ version: 2
 executorType: machine
 jobs:
     build:
+        environment:
+            GRADLE_OPTS: '-Dorg.gradle.daemon=false -Dorg.gradle.workers.max=2 -Dorg.gradle.jvmargs="-Xmx2048m -XX:+HeapDumpOnOutOfMemoryError"'
+            _JAVA_OPTIONS: "-Xms512m -Xmx1024m"
         steps:
             - checkout
             - run: chmod +x gradlew
@@ -17,7 +20,4 @@ jobs:
                   paths:
                       - ~/.m2
                   key: v1-dependencies-{{ checksum "build.gradle" }}
-        environment:
-            GRADLE_OPTS: '-Dorg.gradle.jvmargs="-Xmx2048m -XX:+HeapDumpOnOutOfMemoryError"'
-            _JAVA_OPTIONS: "-Xms512m -Xmx1024m"
-            TERM: dumb
+
