@@ -36,13 +36,11 @@ fun createUser(username: String, email: String, password: String): TestUser {
     }
 
     val userResponseBody = Given {
-        log().all()
         spec(jsonRequest())
         body(body)
     } When {
         post("/api/users")
     } Then {
-        log().all()
         statusCode(201)
         spec(expectJsonResponse())
     } Extract {
