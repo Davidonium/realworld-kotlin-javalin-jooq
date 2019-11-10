@@ -1,8 +1,7 @@
 version: 2
+executorType: machine
 jobs:
     build:
-        docker:
-            - image: openjdk:11.0-jdk
         steps:
             - checkout
             - run: chmod +x gradlew
