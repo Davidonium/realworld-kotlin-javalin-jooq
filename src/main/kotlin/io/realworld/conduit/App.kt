@@ -8,6 +8,7 @@ import io.realworld.conduit.user.infrastructure.injection.userModule
 import javax.sql.DataSource
 import org.koin.core.context.startKoin
 import org.koin.core.context.stopKoin
+import org.koin.core.error.NoPropertyFileFoundException
 
 fun main() {
     App().start()
@@ -19,7 +20,11 @@ class App(
 ) {
 
     private val container = startKoin {
-        fileProperties("/application.properties")
+        try {
+            fileProperties("/application.properties")
+        } catch (e: NoPropertyFileFoundException) {
+            // properties can be loaded from environment or hard-coded
+        }
         environmentProperties()
         properties(properties)
         modules(listOf(
