@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <configuration xmlns="http://www.jooq.org/xsd/jooq-codegen-3.12.0.xsd">
     <generator>
+        <generate>
+            <javaTimeTypes>true</javaTimeTypes>
+        </generate>
         <database>
             <name>org.jooq.meta.xml.XMLDatabase</name>
             <properties>
