@@ -18,6 +18,9 @@ class App(
     private val properties: Map<String, Any> = mapOf(),
     private val initializeDatabase: Boolean = false
 ) {
+    init {
+        System.setProperty("user.timezone", "UTC")
+    }
 
     private val container = startKoin {
         try {
@@ -36,10 +39,6 @@ class App(
     }.koin
 
     private val app = container.get<Javalin>()
-
-    init {
-        System.setProperty("user.timezone", "UTC")
-    }
 
     fun start() {
         if (initializeDatabase) {
