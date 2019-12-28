@@ -18,7 +18,7 @@ buildscript {
         mockk_version = "1.9.3"
         postgres_driver_version = "42.2.6"
         rest_assured_version = "4.1.2"
-        slugify_version = "2.1.+"
+        slugify_version = "2.4"
         testcontainers_postgresql_version = "1.12.1"
     }
 
@@ -66,6 +66,7 @@ dependencies {
     implementation "org.jooq:jooq:$jooq_version"
     implementation "org.koin:koin-core:$koin_version"
     implementation "org.postgresql:postgresql:$postgres_driver_version"
+    implementation "com.github.slugify:slugify:$slugify_version"
 
     testImplementation "io.mockk:mockk:$mockk_version"
     testImplementation "io.rest-assured:rest-assured:$rest_assured_version"
@@ -123,13 +124,29 @@ sourceSets {
     }
 }
 
+// read from application.properties only when it exists
+// environment variables take precedence
+def applicationProps = new Properties()
+def appFile = file("src/main/resources/application.properties")
+if (appFile.exists()) {
+    applicationProps.load(appFile.newInputStream())
+}
+def env = System.getenv()
+def props = applicationProps + env
+
+
 task generateJooqXmlDatabase() {
     group = "Jooq"
     description = "Generate jooq xml schema from database"
 
     doLast {
         def config = file("$projectDir/src/main/resources/db/jooq/jooq-meta.xml")
-                .text.replace("%project_dir%", projectDir.toString())
+                .text
+                .replace("%project_dir%", projectDir.toString())
+                .replace("%db_url%", props["DB_URL"].toString())
+                .replace("%db_user%", props["DB_USER"].toString())
+                .replace("%db_password%", props["DB_PASSWORD"].toString())
+
         GenerationTool.generate(config)
     }
 }
