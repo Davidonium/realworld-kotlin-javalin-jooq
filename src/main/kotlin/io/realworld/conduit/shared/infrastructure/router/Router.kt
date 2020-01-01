@@ -7,7 +7,8 @@ import io.javalin.apibuilder.ApiBuilder.path
 import io.javalin.apibuilder.ApiBuilder.post
 import io.javalin.apibuilder.ApiBuilder.put
 import io.javalin.core.security.SecurityUtil.roles
-import io.realworld.conduit.article.infrastructure.api.ArticleListHandler
+import io.realworld.conduit.article.infrastructure.api.CreateArticleHandler
+import io.realworld.conduit.article.infrastructure.api.RecentArticlesHandler
 import io.realworld.conduit.profile.infrastructure.api.FollowProfileHandler
 import io.realworld.conduit.profile.infrastructure.api.ProfileHandler
 import io.realworld.conduit.profile.infrastructure.api.UnfollowProfileHandler
@@ -33,12 +34,14 @@ class Router : KoinComponent {
     private val followProfileHandler: FollowProfileHandler by inject()
     private val unFollowProfileHandler: UnfollowProfileHandler by inject()
 
-    private val articleListHandler: ArticleListHandler by inject()
+    private val recentArticlesHandler: RecentArticlesHandler by inject()
+    private val createArticleHandler: CreateArticleHandler by inject()
 
     fun setupRoutes(app: Javalin) {
         app.config.accessManager(authenticationAccessManager)
         app.routes {
-            get("/articles", articleListHandler::handle, roles(Roles.AUTH))
+            get("/articles", recentArticlesHandler::handle, roles(Roles.AUTH))
+            post("/articles", createArticleHandler::handle, roles(Roles.AUTH))
             path("/users") {
                 post(userSignupHandler::handle, roles(Roles.ANYONE))
                 post("/login", userSigninHandler::handle, roles(Roles.ANYONE))
