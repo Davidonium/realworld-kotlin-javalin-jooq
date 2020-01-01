@@ -42,10 +42,10 @@ class Router : KoinComponent {
         app.routes {
             get("/articles", recentArticlesHandler::handle, roles(Roles.AUTH))
             post("/articles", createArticleHandler::handle, roles(Roles.AUTH))
+            get("/user", currentUserHandler::handle, roles(Roles.AUTH))
             path("/users") {
                 post(userSignupHandler::handle, roles(Roles.ANYONE))
                 post("/login", userSigninHandler::handle, roles(Roles.ANYONE))
-                get(currentUserHandler::handle, roles(Roles.AUTH))
                 put(updateCurrentUserHandler::handle, roles(Roles.AUTH))
             }
             path("/profiles/:username") {
