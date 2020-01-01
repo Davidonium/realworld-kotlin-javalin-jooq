@@ -6,8 +6,10 @@ import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.zaxxer.hikari.HikariDataSource
 import io.javalin.Javalin
 import io.javalin.plugin.json.JavalinJackson
+import io.realworld.conduit.shared.domain.SlugGenerator
 import io.realworld.conduit.shared.infrastructure.api.ExceptionMapper
 import io.realworld.conduit.shared.infrastructure.router.Router
+import io.realworld.conduit.shared.infrastructure.slug.SlugifySlugGenerator
 import javax.sql.DataSource
 import org.jooq.SQLDialect
 import org.jooq.impl.DSL
@@ -48,4 +50,5 @@ val mainModule = module {
     }
     single { Router() }
     single { ExceptionMapper() }
+    single<SlugGenerator> { SlugifySlugGenerator() }
 }
