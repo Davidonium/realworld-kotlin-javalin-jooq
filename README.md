@@ -8,19 +8,17 @@
 
 This codebase was created to demonstrate a fully fledged fullstack application built with **Kotlin + Javalin + Jooq** including CRUD operations, authentication, routing, pagination, and more.
 
-We've gone to great lengths to adhere to the **Kotlin + Javalin + Jooq** community styleguides & best practices.
-
 For more information on how to this works with other frontends/backends, head over to the [RealWorld](https://github.com/gothinkster/realworld) repo.
 
 
 # How it works
 
-> Describe the general architecture of your app here
+Hexagonal architecture realworld implementation
 
 # Getting started
 
-> docker-compose up -d
-
-> ./gradlew generateJooq
-
-> ./gradlew run
+```bash
+$ docker-compose up -d
+$ ./gradlew generateJooq
+$ ./gradlew run
+```
