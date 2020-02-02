@@ -6,7 +6,7 @@ buildscript {
         bcrypt_version = "0.8.0"
         hikaricp_version = "3.4.1"
         jackson_version = "2.9.9"
-        javalin_version = "3.5.0"
+        javalin_version = "3.7.0"
         jdbi_version = "3.10.1"
         jooq_version = "3.12.1"
         junit_version = "5.5.1"
