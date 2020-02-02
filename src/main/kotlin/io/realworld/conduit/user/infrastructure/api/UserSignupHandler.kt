@@ -11,7 +11,7 @@ class UserSignupHandler(
 ) {
 
     fun handle(ctx: Context) {
-        val request = ctx.bodyValidator<UserSignupBody>().get().user
+        val request = ctx.body<UserSignupBody>().user
 
         val userResponse = userSignupService.execute(request)
         val response = UserResponseBody(userResponse)

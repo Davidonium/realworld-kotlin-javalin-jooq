@@ -10,7 +10,7 @@ class UserSigninHandler(
 ) {
 
     fun handle(ctx: Context) {
-        val request = ctx.bodyValidator<UserSigninBody>().get().user
+        val request = ctx.body<UserSigninBody>().user
         val userResponse = userSigninService.execute(request)
         val response = UserResponseBody(userResponse)
         ctx.json(response)

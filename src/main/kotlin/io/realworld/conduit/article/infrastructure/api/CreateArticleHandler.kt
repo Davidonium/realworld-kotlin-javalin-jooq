@@ -11,7 +11,7 @@ class CreateArticleHandler(private val createArticleService: CreateArticleServic
     fun handle(ctx: Context) {
         val request = CreateArticleRequest(
             currentUserId = ctx.requireCurrentUserId(),
-            article = ctx.bodyValidator<CreateArticleRequestBody>().get().article
+            article = ctx.body<CreateArticleRequestBody>().article
         )
         val response = createArticleService.execute(request)
         ctx.json(ArticleResponseBody(response))

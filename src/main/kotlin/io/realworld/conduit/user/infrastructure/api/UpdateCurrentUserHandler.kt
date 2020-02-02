@@ -9,7 +9,7 @@ class UpdateCurrentUserHandler(
     private val updateCurrentUserService: UpdateCurrentUserService
 ) {
     fun handle(ctx: Context) {
-        val request = ctx.bodyValidator<UpdateUserRequestBody>().get()
+        val request = ctx.body<UpdateUserRequestBody>()
         val response = updateCurrentUserService.execute(ctx.requireCurrentUserId(), request.user)
         ctx.json(UserResponseBody(response))
     }
