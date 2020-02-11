@@ -135,7 +135,7 @@ def env = System.getenv()
 def props = applicationProps + env
 
 
-task generateJooqXmlDatabase() {
+task jooqxml() {
     group = "Jooq"
     description = "Generate jooq xml schema from database"
 
@@ -151,9 +151,9 @@ task generateJooqXmlDatabase() {
     }
 }
 
-task generateJooq() {
+task jooq() {
     group = "Jooq"
-    description = "Generate jooq classes from the xml schema generated from the generateJooqXmlDatabase task"
+    description = "Generate jooq classes from the xml schema generated from the jooqxml task"
 
     doLast {
         def config = file("$projectDir/src/main/resources/db/jooq/jooq.xml")
