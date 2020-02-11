@@ -19,11 +19,11 @@ class AuthenticationAccessManager(private val tokenVerifier: TokenVerifier) : Ac
 
         val authorization = ctx.header(AUTHORIZATION_HEADER)
 
-        val tokenMetadata = authorization?.let {
+        val tokenInfo = authorization?.let {
             tokenVerifier.verify(it.replace("Token ", ""))
         }
 
-        val role = tokenMetadata?.let { Roles.valueOf(it.role) } ?: Roles.ANYONE
+        val role = tokenInfo?.let { Roles.valueOf(it.role) } ?: Roles.ANYONE
 
         val isPublic = permittedRoles.size == 1 && permittedRoles.first() == Roles.ANYONE
 
@@ -31,7 +31,7 @@ class AuthenticationAccessManager(private val tokenVerifier: TokenVerifier) : Ac
             throw UnauthorizedResponse()
         }
 
-        tokenMetadata?.also {
+        tokenInfo?.also {
             ctx.attribute("userId", it.userId)
         }
 

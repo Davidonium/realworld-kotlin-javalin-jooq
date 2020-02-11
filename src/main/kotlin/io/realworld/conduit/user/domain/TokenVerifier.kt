@@ -1,10 +1,10 @@
 package io.realworld.conduit.user.domain
 
 interface TokenVerifier {
-    fun verify(token: String): TokenMetadata
+    fun verify(token: String): TokenInfo
 }
 
-data class TokenMetadata(
+data class TokenInfo(
     val userId: UserId,
     val role: String
 )
