@@ -17,7 +17,7 @@ jobs:
             # fallback to using the latest cache if no exact match is found
             - v1-gradle-cache-
       # run tests!
-      - run: ./gradlew clean generateJooq check --continue --console=plain
+      - run: ./gradlew clean jooq check --continue --console=plain
       - save_cache:
           paths:
             - ~/.gradle/wrapper
