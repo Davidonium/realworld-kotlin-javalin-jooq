@@ -11,8 +11,8 @@ import io.realworld.conduit.user.domain.PasswordHasher
 import io.realworld.conduit.user.domain.TokenCreator
 import io.realworld.conduit.user.domain.TokenVerifier
 import io.realworld.conduit.user.domain.UserRepository
-import io.realworld.conduit.user.infrastructure.api.TokenAccessManager
 import io.realworld.conduit.user.infrastructure.api.CurrentUserHandler
+import io.realworld.conduit.user.infrastructure.api.TokenAccessManager
 import io.realworld.conduit.user.infrastructure.api.UpdateCurrentUserHandler
 import io.realworld.conduit.user.infrastructure.api.UserSigninHandler
 import io.realworld.conduit.user.infrastructure.api.UserSignupHandler

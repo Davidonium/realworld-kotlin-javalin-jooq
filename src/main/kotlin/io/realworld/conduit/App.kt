@@ -5,12 +5,10 @@ import io.realworld.conduit.article.infrastructure.injection.articleModule
 import io.realworld.conduit.profile.infrastructure.injection.profileModule
 import io.realworld.conduit.shared.infrastructure.injection.mainModule
 import io.realworld.conduit.user.infrastructure.injection.userModule
-import org.koin.core.context.stopKoin
+import java.util.TimeZone
 import javax.sql.DataSource
 import org.koin.core.error.NoPropertyFileFoundException
 import org.koin.dsl.koinApplication
-import java.time.ZoneId
-import java.util.TimeZone
 
 fun main() {
     App().start()

@@ -12,9 +12,9 @@ import io.realworld.conduit.article.infrastructure.api.RecentArticlesHandler
 import io.realworld.conduit.profile.infrastructure.api.FollowProfileHandler
 import io.realworld.conduit.profile.infrastructure.api.ProfileHandler
 import io.realworld.conduit.profile.infrastructure.api.UnfollowProfileHandler
-import io.realworld.conduit.user.infrastructure.api.TokenAccessManager
 import io.realworld.conduit.user.infrastructure.api.CurrentUserHandler
 import io.realworld.conduit.user.infrastructure.api.Roles
+import io.realworld.conduit.user.infrastructure.api.TokenAccessManager
 import io.realworld.conduit.user.infrastructure.api.UpdateCurrentUserHandler
 import io.realworld.conduit.user.infrastructure.api.UserSigninHandler
 import io.realworld.conduit.user.infrastructure.api.UserSignupHandler
