@@ -20,7 +20,7 @@ import io.realworld.conduit.user.infrastructure.api.UserSigninHandler
 import io.realworld.conduit.user.infrastructure.api.UserSignupHandler
 
 class Router(
-    private val authenticationAccessManager: TokenAccessManager,
+    private val tokenAccessManager: TokenAccessManager,
 
     private val userSignupHandler: UserSignupHandler,
     private val userSigninHandler: UserSigninHandler,
@@ -35,7 +35,7 @@ class Router(
     private val createArticleHandler: CreateArticleHandler
 ) {
     fun setupRoutes(app: Javalin) {
-        app.config.accessManager(authenticationAccessManager)
+        app.config.accessManager(tokenAccessManager)
         app.routes {
             get("/articles", recentArticlesHandler::handle, roles(Roles.AUTH))
             post("/articles", createArticleHandler::handle, roles(Roles.AUTH))
