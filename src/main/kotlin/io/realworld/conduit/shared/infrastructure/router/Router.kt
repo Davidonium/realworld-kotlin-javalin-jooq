@@ -12,31 +12,28 @@ import io.realworld.conduit.article.infrastructure.api.RecentArticlesHandler
 import io.realworld.conduit.profile.infrastructure.api.FollowProfileHandler
 import io.realworld.conduit.profile.infrastructure.api.ProfileHandler
 import io.realworld.conduit.profile.infrastructure.api.UnfollowProfileHandler
-import io.realworld.conduit.user.infrastructure.api.AuthenticationAccessManager
+import io.realworld.conduit.user.infrastructure.api.TokenAccessManager
 import io.realworld.conduit.user.infrastructure.api.CurrentUserHandler
 import io.realworld.conduit.user.infrastructure.api.Roles
 import io.realworld.conduit.user.infrastructure.api.UpdateCurrentUserHandler
 import io.realworld.conduit.user.infrastructure.api.UserSigninHandler
 import io.realworld.conduit.user.infrastructure.api.UserSignupHandler
-import org.koin.core.KoinComponent
-import org.koin.core.inject
 
-class Router : KoinComponent {
+class Router(
+    private val authenticationAccessManager: TokenAccessManager,
 
-    private val authenticationAccessManager: AuthenticationAccessManager by inject()
+    private val userSignupHandler: UserSignupHandler,
+    private val userSigninHandler: UserSigninHandler,
+    private val currentUserHandler: CurrentUserHandler,
+    private val updateCurrentUserHandler: UpdateCurrentUserHandler,
 
-    private val userSignupHandler: UserSignupHandler by inject()
-    private val userSigninHandler: UserSigninHandler by inject()
-    private val currentUserHandler: CurrentUserHandler by inject()
-    private val updateCurrentUserHandler: UpdateCurrentUserHandler by inject()
+    private val profileHandler: ProfileHandler,
+    private val followProfileHandler: FollowProfileHandler,
+    private val unFollowProfileHandler: UnfollowProfileHandler,
 
-    private val profileHandler: ProfileHandler by inject()
-    private val followProfileHandler: FollowProfileHandler by inject()
-    private val unFollowProfileHandler: UnfollowProfileHandler by inject()
-
-    private val recentArticlesHandler: RecentArticlesHandler by inject()
-    private val createArticleHandler: CreateArticleHandler by inject()
-
+    private val recentArticlesHandler: RecentArticlesHandler,
+    private val createArticleHandler: CreateArticleHandler
+) {
     fun setupRoutes(app: Javalin) {
         app.config.accessManager(authenticationAccessManager)
         app.routes {

@@ -48,7 +48,20 @@ val mainModule = module {
             it.server()?.serverPort = getProperty("APP_PORT")
         }
     }
-    single { Router() }
+    single {
+        Router(
+            get(),
+            get(),
+            get(),
+            get(),
+            get(),
+            get(),
+            get(),
+            get(),
+            get(),
+            get()
+        )
+    }
     single { ExceptionMapper() }
     single<SlugGenerator> { SlugifySlugGenerator() }
 }
