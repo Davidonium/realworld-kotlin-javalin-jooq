@@ -8,6 +8,6 @@ class FollowProfileService(private val profiles: ProfileRepository) {
 
         profiles.follow(request.currentUserId, profileToFollow.id)
 
-        return ProfileResponse.fromProfile(profileToFollow.copy(following = true))
+        return ProfileResponse.fromProfile(profileToFollow).copy(following = true)
     }
 }

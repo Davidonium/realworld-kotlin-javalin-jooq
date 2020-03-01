@@ -8,8 +8,7 @@ class ProfileFactory {
             id = user.id,
             username = user.username,
             bio = user.bio,
-            image = user.image,
-            following = false
+            image = user.image
         )
     }
 }

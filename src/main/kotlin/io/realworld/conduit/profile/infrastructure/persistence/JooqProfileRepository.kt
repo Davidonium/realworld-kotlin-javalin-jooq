@@ -41,7 +41,6 @@ fun profileFromRecord(r: Record): Profile {
         id = UserId(r[USERS.ID]),
         username = r[USERS.USERNAME],
         bio = r[USERS.BIO],
-        image = r[USERS.IMAGE],
-        following = r[FOLLOWS.TO_USER_ID] != null
+        image = r[USERS.IMAGE]
     )
 }

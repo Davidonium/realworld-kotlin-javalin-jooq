@@ -9,8 +9,6 @@ import org.junit.jupiter.api.extension.ExtensionContext.Store
 import org.testcontainers.containers.PostgreSQLContainer
 
 class WebServerExtension : BeforeAllCallback {
-    private lateinit var app: App
-
     override fun beforeAll(context: ExtensionContext) {
         val store = rootStore(context)
         store.getOrComputeIfAbsent("app") {
@@ -24,7 +22,7 @@ class WebServerExtension : BeforeAllCallback {
                 "APP_PORT" to 0
             )
 
-            app = App(
+            val app = App(
                 properties = properties,
                 initializeDatabase = true
             )

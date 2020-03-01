@@ -11,7 +11,7 @@ import io.realworld.conduit.user.domain.PasswordHasher
 import io.realworld.conduit.user.domain.TokenCreator
 import io.realworld.conduit.user.domain.TokenVerifier
 import io.realworld.conduit.user.domain.UserRepository
-import io.realworld.conduit.user.infrastructure.api.AuthenticationAccessManager
+import io.realworld.conduit.user.infrastructure.api.TokenAccessManager
 import io.realworld.conduit.user.infrastructure.api.CurrentUserHandler
 import io.realworld.conduit.user.infrastructure.api.UpdateCurrentUserHandler
 import io.realworld.conduit.user.infrastructure.api.UserSigninHandler
@@ -36,7 +36,7 @@ val userModule = module {
         .withIssuer("conduit")
         .build()
     }
-    single { AuthenticationAccessManager(get()) }
+    single { TokenAccessManager(get()) }
     single<PasswordHasher> { BCryptPasswordHasher() }
     single { UserSignupService(get(), get(), get()) }
     single { UserSigninService(get(), get(), get()) }

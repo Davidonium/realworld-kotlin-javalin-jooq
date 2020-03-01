@@ -9,6 +9,6 @@ class UnfollowProfileService(private val profiles: ProfileRepository) {
 
         profiles.unfollow(request.currentUserId, profileToUnfollow.id)
 
-        return ProfileResponse.fromProfile(profileToUnfollow.copy(following = false))
+        return ProfileResponse.fromProfile(profileToUnfollow).copy(following = false)
     }
 }

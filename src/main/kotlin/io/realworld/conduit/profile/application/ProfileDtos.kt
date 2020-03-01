@@ -24,7 +24,7 @@ data class ProfileResponse(
                 username = profile.username,
                 bio = profile.bio,
                 image = profile.image,
-                following = profile.following
+                following = false
             )
         }
     }

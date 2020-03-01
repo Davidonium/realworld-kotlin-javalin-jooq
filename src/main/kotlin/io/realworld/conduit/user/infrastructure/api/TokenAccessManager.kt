@@ -13,7 +13,7 @@ internal enum class Roles : Role {
     ANYONE, AUTH
 }
 
-class AuthenticationAccessManager(private val tokenVerifier: TokenVerifier) : AccessManager {
+class TokenAccessManager(private val tokenVerifier: TokenVerifier) : AccessManager {
 
     override fun manage(handler: Handler, ctx: Context, permittedRoles: MutableSet<Role>) {
 
@@ -23,11 +23,9 @@ class AuthenticationAccessManager(private val tokenVerifier: TokenVerifier) : Ac
             tokenVerifier.verify(it.replace("Token ", ""))
         }
 
-        val role = tokenInfo?.let { Roles.valueOf(it.role) } ?: Roles.ANYONE
-
         val isPublic = permittedRoles.size == 1 && permittedRoles.first() == Roles.ANYONE
 
-        if (!isPublic && !permittedRoles.contains(role)) {
+        if (!isPublic && tokenInfo == null) {
             throw UnauthorizedResponse()
         }
 

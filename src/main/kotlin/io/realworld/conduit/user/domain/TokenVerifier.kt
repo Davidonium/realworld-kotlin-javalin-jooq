@@ -5,6 +5,5 @@ interface TokenVerifier {
 }
 
 data class TokenInfo(
-    val userId: UserId,
-    val role: String
+    val userId: UserId
 )

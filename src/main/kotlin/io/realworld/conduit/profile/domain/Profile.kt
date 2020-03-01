@@ -6,6 +6,5 @@ data class Profile(
     val id: UserId,
     val username: String,
     val bio: String?,
-    val image: String?,
-    val following: Boolean
+    val image: String?
 )
