@@ -5,7 +5,7 @@ import io.realworld.conduit.profile.domain.ProfileRepository
 class UnfollowProfileService(private val profiles: ProfileRepository) {
 
     fun execute(request: UnfollowProfileRequest): ProfileResponse {
-        val profileToUnfollow = profiles.byUsername(request.currentUserId, request.username)
+        val profileToUnfollow = profiles.byUsername(request.username)
 
         profiles.unfollow(request.currentUserId, profileToUnfollow.id)
 
