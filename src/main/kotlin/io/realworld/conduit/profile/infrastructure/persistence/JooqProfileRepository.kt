@@ -10,12 +10,9 @@ import org.jooq.DSLContext
 import org.jooq.Record
 
 class JooqProfileRepository(private val ctx: DSLContext) : ProfileRepository {
-    override fun byUsername(currentUserId: UserId?, username: String): Profile {
+    override fun byUsername(username: String): Profile {
         return ctx.select()
             .from(USERS)
-            .leftJoin(FOLLOWS)
-                .on(FOLLOWS.TO_USER_ID.eq(USERS.ID)
-                    .and(FOLLOWS.FROM_USER_ID.eq(currentUserId?.value)))
             .where(USERS.USERNAME.eq(username))
             .fetchOne(::profileFromRecord)
             ?: throw ProfileNotFoundException()
