@@ -13,6 +13,7 @@ import io.realworld.conduit.shared.infrastructure.persistence.spring.SpringJooqT
 import io.realworld.conduit.shared.infrastructure.persistence.spring.SpringUnitOfWork
 import io.realworld.conduit.shared.infrastructure.router.Router
 import io.realworld.conduit.shared.infrastructure.slug.SlugifySlugGenerator
+import javax.sql.DataSource
 import org.jooq.SQLDialect
 import org.jooq.impl.DSL
 import org.jooq.impl.DefaultConfiguration
@@ -22,7 +23,6 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager
 import org.springframework.jdbc.datasource.TransactionAwareDataSourceProxy
 import org.springframework.transaction.PlatformTransactionManager
 import org.springframework.transaction.support.TransactionTemplate
-import javax.sql.DataSource
 
 val mainModule = module {
     single<DataSource> {

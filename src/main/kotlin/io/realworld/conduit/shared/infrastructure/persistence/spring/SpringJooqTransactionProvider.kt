@@ -4,7 +4,6 @@ import org.jooq.Transaction
 import org.jooq.TransactionContext
 import org.jooq.TransactionProvider
 import org.slf4j.LoggerFactory
-import org.springframework.jdbc.datasource.DataSourceTransactionManager
 import org.springframework.transaction.PlatformTransactionManager
 import org.springframework.transaction.TransactionDefinition.PROPAGATION_NESTED
 import org.springframework.transaction.TransactionStatus

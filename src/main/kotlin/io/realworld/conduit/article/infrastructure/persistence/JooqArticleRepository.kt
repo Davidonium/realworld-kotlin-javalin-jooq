@@ -80,7 +80,6 @@ class JooqArticleRepository(private val ctx: DSLContext) : ArticleRepository {
                 articleToTag.store()
             }
         }
-
     }
 }
 
