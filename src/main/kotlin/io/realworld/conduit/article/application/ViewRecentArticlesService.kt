@@ -14,10 +14,11 @@ class ViewRecentArticlesService(private val articles: ArticleRepository) {
             limit = request.limit,
             offset = request.offset
         )
-        val articles = articles.recent(request.currentUserId, filters)
+        val articleList = articles.recent(filters)
+        val articlesCount = articles.recentCount(filters)
 
         return ArticleListResponse(
-            articles = articles.map { article ->
+            articles = articleList.map { article ->
                 ArticleResponse(
                     slug = article.slug,
                     title = article.title,
@@ -31,7 +32,7 @@ class ViewRecentArticlesService(private val articles: ArticleRepository) {
                     author = ProfileResponse.fromProfile(article.author)
                 )
             },
-            articlesCount = 0 // TODO calculate this
+            articlesCount = articlesCount
         )
     }
 }

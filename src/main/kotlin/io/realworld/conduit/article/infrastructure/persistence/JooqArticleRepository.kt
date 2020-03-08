@@ -2,54 +2,91 @@ package io.realworld.conduit.article.infrastructure.persistence
 
 import io.realworld.conduit.article.domain.Article
 import io.realworld.conduit.article.domain.ArticleFilters
+import io.realworld.conduit.article.domain.ArticleId
 import io.realworld.conduit.article.domain.ArticleRepository
 import io.realworld.conduit.generated.database.Tables.ARTICLES
-import io.realworld.conduit.generated.database.Tables.FOLLOWS
+import io.realworld.conduit.generated.database.Tables.ARTICLE_TO_TAG
+import io.realworld.conduit.generated.database.Tables.TAGS
 import io.realworld.conduit.generated.database.Tables.USERS
 import io.realworld.conduit.profile.infrastructure.persistence.profileFromRecord
-import io.realworld.conduit.user.domain.UserId
 import org.jooq.DSLContext
 import org.jooq.Record
+import org.jooq.impl.DSL
 
 class JooqArticleRepository(private val ctx: DSLContext) : ArticleRepository {
-    override fun bySlug(currentUserId: UserId?, slug: String): Article? {
-        return ctx.select()
+    override fun bySlug(slug: String): Article? {
+        return ctx
+            .select()
             .from(ARTICLES)
             .join(USERS).onKey()
-            .leftJoin(FOLLOWS)
-                .on(FOLLOWS.TO_USER_ID.eq(USERS.ID)
-                    .and(FOLLOWS.FROM_USER_ID.eq(currentUserId?.value)))
             .fetchOne(::articleFromRecord)
     }
 
-    override fun recent(currentUserId: UserId?, filters: ArticleFilters): List<Article> {
-        return ctx.select()
+    override fun recent(filters: ArticleFilters): List<Article> {
+
+        val tagQuery = ctx
+            .select(TAGS.NAME)
+            .from(TAGS)
+            .join(ARTICLE_TO_TAG).on(ARTICLE_TO_TAG.TAG_ID.eq(TAGS.ID))
+            .where(ARTICLE_TO_TAG.ARTICLE_ID.eq(ARTICLES.ID))
+            .asField<IntArray>("tags")
+
+        return ctx
+            .select(
+                *ARTICLES.fields(),
+                *USERS.fields(),
+                tagQuery
+            )
             .from(ARTICLES)
             .join(USERS).onKey()
-            .leftJoin(FOLLOWS)
-                .on(FOLLOWS.TO_USER_ID.eq(USERS.ID)
-                    .and(FOLLOWS.FROM_USER_ID.eq(currentUserId?.value)))
             .fetch(::articleFromRecord)
     }
 
-    override fun insert(article: Article): Article {
-        val articleId = ctx.insertInto(ARTICLES)
-            .set(ARTICLES.TITLE, article.title)
-            .set(ARTICLES.DESCRIPTION, article.description)
-            .set(ARTICLES.BODY, article.body)
-            .set(ARTICLES.SLUG, article.slug)
-            .set(ARTICLES.AUTHOR_ID, article.author.id.value)
-            .set(ARTICLES.CREATED_AT, article.createdAt)
-            .returning()
-            .fetchOne().id
+    override fun recentCount(filters: ArticleFilters): Int {
+        return ctx
+            .selectCount()
+            .from(ARTICLES)
+            .join(USERS).onKey()
+            .fetchSingle(0, Int::class.java)
+    }
 
-        return article.copy(id = articleId)
+    override fun insert(article: Article): Article {
+        val articleRecord = ctx.newRecord(ARTICLES).apply {
+            title = article.title
+            description = article.description
+            body = article.body
+            slug = article.slug
+            authorId = article.author.id.value
+            createdAt = article.createdAt
+        }
+        articleRecord.store()
+
+        return article.withId(id = ArticleId(articleRecord.id))
+    }
+
+    override fun assignTags(article: Article) {
+        ctx.transaction { configuration ->
+            val context = DSL.using(configuration)
+
+            context
+                .deleteFrom(ARTICLE_TO_TAG)
+                .where(ARTICLE_TO_TAG.ARTICLE_ID.eq(article.id.value))
+
+            article.tags.forEach { tag ->
+                val articleToTag = context.newRecord(ARTICLE_TO_TAG).apply {
+                    articleId = article.id.value
+                    tagId = tag.id
+                }
+                articleToTag.store()
+            }
+        }
+
     }
 }
 
 fun articleFromRecord(r: Record): Article {
     return Article(
-        id = r[ARTICLES.ID],
+        id = ArticleId(r[ARTICLES.ID]),
         slug = r[ARTICLES.SLUG],
         title = r[ARTICLES.TITLE],
         description = r[ARTICLES.DESCRIPTION],

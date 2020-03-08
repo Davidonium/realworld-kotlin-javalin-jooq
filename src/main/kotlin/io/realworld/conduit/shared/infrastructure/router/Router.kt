@@ -9,6 +9,7 @@ import io.javalin.apibuilder.ApiBuilder.put
 import io.javalin.core.security.SecurityUtil.roles
 import io.realworld.conduit.article.infrastructure.api.CreateArticleHandler
 import io.realworld.conduit.article.infrastructure.api.RecentArticlesHandler
+import io.realworld.conduit.article.infrastructure.api.TagsHandler
 import io.realworld.conduit.profile.infrastructure.api.FollowProfileHandler
 import io.realworld.conduit.profile.infrastructure.api.ProfileHandler
 import io.realworld.conduit.profile.infrastructure.api.UnfollowProfileHandler
@@ -32,15 +33,18 @@ class Router(
     private val unFollowProfileHandler: UnfollowProfileHandler,
 
     private val recentArticlesHandler: RecentArticlesHandler,
-    private val createArticleHandler: CreateArticleHandler
+    private val createArticleHandler: CreateArticleHandler,
+
+    private val tagsHandler: TagsHandler
 ) {
     fun setupRoutes(app: Javalin) {
         app.config.accessManager(tokenAccessManager)
         app.routes {
             get("/articles", recentArticlesHandler::handle, roles(Roles.AUTH))
             post("/articles", createArticleHandler::handle, roles(Roles.AUTH))
-            get("/user", currentUserHandler::handle, roles(Roles.AUTH))
+            get("/tags", tagsHandler::handle, roles(Roles.AUTH))
             path("/users") {
+                get(currentUserHandler::handle, roles(Roles.AUTH))
                 post(userSignupHandler::handle, roles(Roles.ANYONE))
                 post("/login", userSigninHandler::handle, roles(Roles.ANYONE))
                 put(updateCurrentUserHandler::handle, roles(Roles.AUTH))

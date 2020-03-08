@@ -28,6 +28,13 @@ class JooqTagRepository(private val ctx: DSLContext) : TagRepository {
 
         return tag.copy(id = id)
     }
+
+    override fun byName(name: String): Tag? {
+        return ctx.select()
+            .from(TAGS)
+            .where(TAGS.NAME.eq(name))
+            .fetchOne { tagFromRecord(it) }
+    }
 }
 
 private fun tagFromRecord(r: Record) = Tag(r[TAGS.ID], r[TAGS.NAME])
