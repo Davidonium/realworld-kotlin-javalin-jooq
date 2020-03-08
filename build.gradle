@@ -19,6 +19,7 @@ buildscript {
         postgres_driver_version = "42.2.6"
         rest_assured_version = "4.1.2"
         slugify_version = "2.4"
+        spring_jdbc_version = "5.2.4.RELEASE"
         testcontainers_postgresql_version = "1.12.1"
     }
 
@@ -67,6 +68,7 @@ dependencies {
     implementation "org.koin:koin-core:$koin_version"
     implementation "org.postgresql:postgresql:$postgres_driver_version"
     implementation "com.github.slugify:slugify:$slugify_version"
+    implementation "org.springframework:spring-jdbc:$spring_jdbc_version"
 
     testImplementation "io.mockk:mockk:$mockk_version"
     testImplementation "io.rest-assured:rest-assured:$rest_assured_version"

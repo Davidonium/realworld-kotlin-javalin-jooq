@@ -7,13 +7,22 @@ import com.zaxxer.hikari.HikariDataSource
 import io.javalin.Javalin
 import io.javalin.plugin.json.JavalinJackson
 import io.realworld.conduit.shared.domain.SlugGenerator
+import io.realworld.conduit.shared.domain.UnitOfWork
 import io.realworld.conduit.shared.infrastructure.api.ExceptionMapper
+import io.realworld.conduit.shared.infrastructure.persistence.spring.SpringJooqTransactionProvider
+import io.realworld.conduit.shared.infrastructure.persistence.spring.SpringUnitOfWork
 import io.realworld.conduit.shared.infrastructure.router.Router
 import io.realworld.conduit.shared.infrastructure.slug.SlugifySlugGenerator
-import javax.sql.DataSource
 import org.jooq.SQLDialect
 import org.jooq.impl.DSL
+import org.jooq.impl.DefaultConfiguration
+import org.koin.core.qualifier.named
 import org.koin.dsl.module
+import org.springframework.jdbc.datasource.DataSourceTransactionManager
+import org.springframework.jdbc.datasource.TransactionAwareDataSourceProxy
+import org.springframework.transaction.PlatformTransactionManager
+import org.springframework.transaction.support.TransactionTemplate
+import javax.sql.DataSource
 
 val mainModule = module {
     single<DataSource> {
@@ -27,9 +36,17 @@ val mainModule = module {
             addDataSourceProperty("prepStmtCacheSqlLimit", "2048")
         }
     }
+    single<DataSource>(named("transactionDataSource")) { TransactionAwareDataSourceProxy(get<DataSource>()) }
+    single<PlatformTransactionManager> { DataSourceTransactionManager(get<DataSource>()) }
     single {
-        DSL.using(get<DataSource>(), SQLDialect.POSTGRES)
+        val config = DefaultConfiguration()
+            .set(SQLDialect.POSTGRES)
+            .set(SpringJooqTransactionProvider(get()))
+            .set(get<DataSource>(named("transactionDataSource")))
+
+        DSL.using(config)
     }
+    single<UnitOfWork> { SpringUnitOfWork(TransactionTemplate(get())) }
     single {
         jacksonObjectMapper()
             .registerModule(JavaTimeModule())
@@ -48,6 +65,8 @@ val mainModule = module {
             it.server()?.serverPort = getProperty("APP_PORT")
         }
     }
+    single { ExceptionMapper() }
+    single<SlugGenerator> { SlugifySlugGenerator() }
     single {
         Router(
             get(),
@@ -63,6 +82,4 @@ val mainModule = module {
             get()
         )
     }
-    single { ExceptionMapper() }
-    single<SlugGenerator> { SlugifySlugGenerator() }
 }
