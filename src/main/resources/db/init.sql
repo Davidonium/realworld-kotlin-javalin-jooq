@@ -76,13 +76,12 @@ create table if not exists tags
 create table if not exists favorited_articles
 (
     article_id integer not null
-        constraint favorited_articles_pk
-            primary key
         constraint favorited_articles_articles_id_fk
             references articles,
     user_id integer not null
         constraint favorited_articles_users_id_fk
-            references users
+            references users,
+    primary key (article_id, user_id)
 );
 
 create index if not exists favorited_articles_article_id_index
@@ -97,20 +96,16 @@ create table if not exists article_to_tag
         constraint article_to_tag_articles_id_fk
             references articles,
     tag_id integer not null
-        constraint article_to_tag_pk
-            primary key
         constraint article_to_tag_tags_id_fk
-            references tags
+            references tags,
+    primary key (article_id, tag_id)
 );
 
 create table if not exists follows
 (
-    from_user_id integer not null
-        constraint follows_users_id_fk
-            references users,
-    to_user_id integer not null
-        constraint follows_pk
-            primary key
-        constraint follows_users_id_fk_2
-            references users
+    from_user_id integer not null,
+    to_user_id integer not null,
+    primary key (from_user_id, to_user_id),
+    foreign key (from_user_id) references users (id),
+    foreign key (to_user_id) references users (id)
 );
