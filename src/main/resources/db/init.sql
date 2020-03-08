@@ -84,9 +84,6 @@ create table if not exists favorited_articles
     primary key (article_id, user_id)
 );
 
-create index if not exists favorited_articles_article_id_index
-    on favorited_articles (article_id);
-
 create index if not exists favorited_articles_user_id_index
     on favorited_articles (user_id);
 
