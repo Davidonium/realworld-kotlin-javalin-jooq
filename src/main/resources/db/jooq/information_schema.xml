@@ -395,18 +395,6 @@
             <table_catalog></table_catalog>
             <table_schema>public</table_schema>
             <table_name>users</table_name>
-            <column_name>token</column_name>
-            <data_type>text</data_type>
-            <character_maximum_length>0</character_maximum_length>
-            <numeric_precision>0</numeric_precision>
-            <numeric_scale>0</numeric_scale>
-            <ordinal_position>4</ordinal_position>
-            <is_nullable>true</is_nullable>
-        </column>
-        <column>
-            <table_catalog></table_catalog>
-            <table_schema>public</table_schema>
-            <table_name>users</table_name>
             <column_name>username</column_name>
             <data_type>text</data_type>
             <character_maximum_length>0</character_maximum_length>
@@ -453,7 +441,7 @@
         <table_constraint>
             <constraint_catalog></constraint_catalog>
             <constraint_schema>public</constraint_schema>
-            <constraint_name>article_to_tag_pk</constraint_name>
+            <constraint_name>article_to_tag_pkey</constraint_name>
             <constraint_type>PRIMARY KEY</constraint_type>
             <table_catalog></table_catalog>
             <table_schema>public</table_schema>
@@ -471,7 +459,7 @@
         <table_constraint>
             <constraint_catalog></constraint_catalog>
             <constraint_schema>public</constraint_schema>
-            <constraint_name>favorited_articles_pk</constraint_name>
+            <constraint_name>favorited_articles_pkey</constraint_name>
             <constraint_type>PRIMARY KEY</constraint_type>
             <table_catalog></table_catalog>
             <table_schema>public</table_schema>
@@ -480,7 +468,7 @@
         <table_constraint>
             <constraint_catalog></constraint_catalog>
             <constraint_schema>public</constraint_schema>
-            <constraint_name>follows_pk</constraint_name>
+            <constraint_name>follows_pkey</constraint_name>
             <constraint_type>PRIMARY KEY</constraint_type>
             <table_catalog></table_catalog>
             <table_schema>public</table_schema>
@@ -570,7 +558,7 @@
         <table_constraint>
             <constraint_catalog></constraint_catalog>
             <constraint_schema>public</constraint_schema>
-            <constraint_name>follows__follows_users_id_fk</constraint_name>
+            <constraint_name>follows__follows_from_user_id_fkey</constraint_name>
             <constraint_type>FOREIGN KEY</constraint_type>
             <table_catalog></table_catalog>
             <table_schema>public</table_schema>
@@ -579,7 +567,7 @@
         <table_constraint>
             <constraint_catalog></constraint_catalog>
             <constraint_schema>public</constraint_schema>
-            <constraint_name>follows__follows_users_id_fk_2</constraint_name>
+            <constraint_name>follows__follows_to_user_id_fkey</constraint_name>
             <constraint_type>FOREIGN KEY</constraint_type>
             <table_catalog></table_catalog>
             <table_schema>public</table_schema>
@@ -588,7 +576,7 @@
         <table_constraint>
             <constraint_catalog></constraint_catalog>
             <constraint_schema>public</constraint_schema>
-            <constraint_name>2200_16387_1_not_null</constraint_name>
+            <constraint_name>2200_16534_1_not_null</constraint_name>
             <constraint_type>CHECK</constraint_type>
             <table_catalog></table_catalog>
             <table_schema>public</table_schema>
@@ -597,7 +585,7 @@
         <table_constraint>
             <constraint_catalog></constraint_catalog>
             <constraint_schema>public</constraint_schema>
-            <constraint_name>2200_16387_2_not_null</constraint_name>
+            <constraint_name>2200_16534_2_not_null</constraint_name>
             <constraint_type>CHECK</constraint_type>
             <table_catalog></table_catalog>
             <table_schema>public</table_schema>
@@ -606,7 +594,7 @@
         <table_constraint>
             <constraint_catalog></constraint_catalog>
             <constraint_schema>public</constraint_schema>
-            <constraint_name>2200_16387_3_not_null</constraint_name>
+            <constraint_name>2200_16534_3_not_null</constraint_name>
             <constraint_type>CHECK</constraint_type>
             <table_catalog></table_catalog>
             <table_schema>public</table_schema>
@@ -615,7 +603,7 @@
         <table_constraint>
             <constraint_catalog></constraint_catalog>
             <constraint_schema>public</constraint_schema>
-            <constraint_name>2200_16387_4_not_null</constraint_name>
+            <constraint_name>2200_16534_4_not_null</constraint_name>
             <constraint_type>CHECK</constraint_type>
             <table_catalog></table_catalog>
             <table_schema>public</table_schema>
@@ -624,7 +612,7 @@
         <table_constraint>
             <constraint_catalog></constraint_catalog>
             <constraint_schema>public</constraint_schema>
-            <constraint_name>2200_16387_5_not_null</constraint_name>
+            <constraint_name>2200_16534_5_not_null</constraint_name>
             <constraint_type>CHECK</constraint_type>
             <table_catalog></table_catalog>
             <table_schema>public</table_schema>
@@ -633,7 +621,7 @@
         <table_constraint>
             <constraint_catalog></constraint_catalog>
             <constraint_schema>public</constraint_schema>
-            <constraint_name>2200_16387_6_not_null</constraint_name>
+            <constraint_name>2200_16534_6_not_null</constraint_name>
             <constraint_type>CHECK</constraint_type>
             <table_catalog></table_catalog>
             <table_schema>public</table_schema>
@@ -642,7 +630,7 @@
         <table_constraint>
             <constraint_catalog></constraint_catalog>
             <constraint_schema>public</constraint_schema>
-            <constraint_name>2200_16387_8_not_null</constraint_name>
+            <constraint_name>2200_16534_8_not_null</constraint_name>
             <constraint_type>CHECK</constraint_type>
             <table_catalog></table_catalog>
             <table_schema>public</table_schema>
@@ -651,7 +639,7 @@
         <table_constraint>
             <constraint_catalog></constraint_catalog>
             <constraint_schema>public</constraint_schema>
-            <constraint_name>2200_16460_1_not_null</constraint_name>
+            <constraint_name>2200_16603_1_not_null</constraint_name>
             <constraint_type>CHECK</constraint_type>
             <table_catalog></table_catalog>
             <table_schema>public</table_schema>
@@ -660,7 +648,7 @@
         <table_constraint>
             <constraint_catalog></constraint_catalog>
             <constraint_schema>public</constraint_schema>
-            <constraint_name>2200_16460_2_not_null</constraint_name>
+            <constraint_name>2200_16603_2_not_null</constraint_name>
             <constraint_type>CHECK</constraint_type>
             <table_catalog></table_catalog>
             <table_schema>public</table_schema>
@@ -669,7 +657,7 @@
         <table_constraint>
             <constraint_catalog></constraint_catalog>
             <constraint_schema>public</constraint_schema>
-            <constraint_name>2200_16411_1_not_null</constraint_name>
+            <constraint_name>2200_16554_1_not_null</constraint_name>
             <constraint_type>CHECK</constraint_type>
             <table_catalog></table_catalog>
             <table_schema>public</table_schema>
@@ -678,7 +666,7 @@
         <table_constraint>
             <constraint_catalog></constraint_catalog>
             <constraint_schema>public</constraint_schema>
-            <constraint_name>2200_16411_2_not_null</constraint_name>
+            <constraint_name>2200_16554_2_not_null</constraint_name>
             <constraint_type>CHECK</constraint_type>
             <table_catalog></table_catalog>
             <table_schema>public</table_schema>
@@ -687,7 +675,7 @@
         <table_constraint>
             <constraint_catalog></constraint_catalog>
             <constraint_schema>public</constraint_schema>
-            <constraint_name>2200_16411_3_not_null</constraint_name>
+            <constraint_name>2200_16554_3_not_null</constraint_name>
             <constraint_type>CHECK</constraint_type>
             <table_catalog></table_catalog>
             <table_schema>public</table_schema>
@@ -696,7 +684,7 @@
         <table_constraint>
             <constraint_catalog></constraint_catalog>
             <constraint_schema>public</constraint_schema>
-            <constraint_name>2200_16411_5_not_null</constraint_name>
+            <constraint_name>2200_16554_5_not_null</constraint_name>
             <constraint_type>CHECK</constraint_type>
             <table_catalog></table_catalog>
             <table_schema>public</table_schema>
@@ -705,7 +693,7 @@
         <table_constraint>
             <constraint_catalog></constraint_catalog>
             <constraint_schema>public</constraint_schema>
-            <constraint_name>2200_16411_6_not_null</constraint_name>
+            <constraint_name>2200_16554_6_not_null</constraint_name>
             <constraint_type>CHECK</constraint_type>
             <table_catalog></table_catalog>
             <table_schema>public</table_schema>
@@ -714,7 +702,7 @@
         <table_constraint>
             <constraint_catalog></constraint_catalog>
             <constraint_schema>public</constraint_schema>
-            <constraint_name>2200_16445_1_not_null</constraint_name>
+            <constraint_name>2200_16586_1_not_null</constraint_name>
             <constraint_type>CHECK</constraint_type>
             <table_catalog></table_catalog>
             <table_schema>public</table_schema>
@@ -723,7 +711,7 @@
         <table_constraint>
             <constraint_catalog></constraint_catalog>
             <constraint_schema>public</constraint_schema>
-            <constraint_name>2200_16445_2_not_null</constraint_name>
+            <constraint_name>2200_16586_2_not_null</constraint_name>
             <constraint_type>CHECK</constraint_type>
             <table_catalog></table_catalog>
             <table_schema>public</table_schema>
@@ -732,7 +720,7 @@
         <table_constraint>
             <constraint_catalog></constraint_catalog>
             <constraint_schema>public</constraint_schema>
-            <constraint_name>2200_16480_1_not_null</constraint_name>
+            <constraint_name>2200_16618_1_not_null</constraint_name>
             <constraint_type>CHECK</constraint_type>
             <table_catalog></table_catalog>
             <table_schema>public</table_schema>
@@ -741,7 +729,7 @@
         <table_constraint>
             <constraint_catalog></constraint_catalog>
             <constraint_schema>public</constraint_schema>
-            <constraint_name>2200_16480_2_not_null</constraint_name>
+            <constraint_name>2200_16618_2_not_null</constraint_name>
             <constraint_type>CHECK</constraint_type>
             <table_catalog></table_catalog>
             <table_schema>public</table_schema>
@@ -750,7 +738,7 @@
         <table_constraint>
             <constraint_catalog></constraint_catalog>
             <constraint_schema>public</constraint_schema>
-            <constraint_name>2200_16436_1_not_null</constraint_name>
+            <constraint_name>2200_16577_1_not_null</constraint_name>
             <constraint_type>CHECK</constraint_type>
             <table_catalog></table_catalog>
             <table_schema>public</table_schema>
@@ -759,7 +747,7 @@
         <table_constraint>
             <constraint_catalog></constraint_catalog>
             <constraint_schema>public</constraint_schema>
-            <constraint_name>2200_16436_2_not_null</constraint_name>
+            <constraint_name>2200_16577_2_not_null</constraint_name>
             <constraint_type>CHECK</constraint_type>
             <table_catalog></table_catalog>
             <table_schema>public</table_schema>
@@ -768,7 +756,7 @@
         <table_constraint>
             <constraint_catalog></constraint_catalog>
             <constraint_schema>public</constraint_schema>
-            <constraint_name>2200_16398_1_not_null</constraint_name>
+            <constraint_name>2200_16523_1_not_null</constraint_name>
             <constraint_type>CHECK</constraint_type>
             <table_catalog></table_catalog>
             <table_schema>public</table_schema>
@@ -777,7 +765,7 @@
         <table_constraint>
             <constraint_catalog></constraint_catalog>
             <constraint_schema>public</constraint_schema>
-            <constraint_name>2200_16398_2_not_null</constraint_name>
+            <constraint_name>2200_16523_2_not_null</constraint_name>
             <constraint_type>CHECK</constraint_type>
             <table_catalog></table_catalog>
             <table_schema>public</table_schema>
@@ -786,7 +774,7 @@
         <table_constraint>
             <constraint_catalog></constraint_catalog>
             <constraint_schema>public</constraint_schema>
-            <constraint_name>2200_16398_3_not_null</constraint_name>
+            <constraint_name>2200_16523_3_not_null</constraint_name>
             <constraint_type>CHECK</constraint_type>
             <table_catalog></table_catalog>
             <table_schema>public</table_schema>
@@ -805,11 +793,21 @@
             <table_name>articles</table_name>
         </key_column_usage>
         <key_column_usage>
+            <column_name>article_id</column_name>
+            <constraint_catalog></constraint_catalog>
+            <constraint_schema>public</constraint_schema>
+            <constraint_name>article_to_tag_pkey</constraint_name>
+            <ordinal_position>0</ordinal_position>
+            <table_catalog></table_catalog>
+            <table_schema>public</table_schema>
+            <table_name>article_to_tag</table_name>
+        </key_column_usage>
+        <key_column_usage>
             <column_name>tag_id</column_name>
             <constraint_catalog></constraint_catalog>
             <constraint_schema>public</constraint_schema>
-            <constraint_name>article_to_tag_pk</constraint_name>
-            <ordinal_position>0</ordinal_position>
+            <constraint_name>article_to_tag_pkey</constraint_name>
+            <ordinal_position>1</ordinal_position>
             <table_catalog></table_catalog>
             <table_schema>public</table_schema>
             <table_name>article_to_tag</table_name>
@@ -828,18 +826,38 @@
             <column_name>article_id</column_name>
             <constraint_catalog></constraint_catalog>
             <constraint_schema>public</constraint_schema>
-            <constraint_name>favorited_articles_pk</constraint_name>
+            <constraint_name>favorited_articles_pkey</constraint_name>
             <ordinal_position>0</ordinal_position>
             <table_catalog></table_catalog>
             <table_schema>public</table_schema>
             <table_name>favorited_articles</table_name>
         </key_column_usage>
         <key_column_usage>
+            <column_name>user_id</column_name>
+            <constraint_catalog></constraint_catalog>
+            <constraint_schema>public</constraint_schema>
+            <constraint_name>favorited_articles_pkey</constraint_name>
+            <ordinal_position>1</ordinal_position>
+            <table_catalog></table_catalog>
+            <table_schema>public</table_schema>
+            <table_name>favorited_articles</table_name>
+        </key_column_usage>
+        <key_column_usage>
+            <column_name>from_user_id</column_name>
+            <constraint_catalog></constraint_catalog>
+            <constraint_schema>public</constraint_schema>
+            <constraint_name>follows_pkey</constraint_name>
+            <ordinal_position>0</ordinal_position>
+            <table_catalog></table_catalog>
+            <table_schema>public</table_schema>
+            <table_name>follows</table_name>
+        </key_column_usage>
+        <key_column_usage>
             <column_name>to_user_id</column_name>
             <constraint_catalog></constraint_catalog>
             <constraint_schema>public</constraint_schema>
-            <constraint_name>follows_pk</constraint_name>
-            <ordinal_position>0</ordinal_position>
+            <constraint_name>follows_pkey</constraint_name>
+            <ordinal_position>1</ordinal_position>
             <table_catalog></table_catalog>
             <table_schema>public</table_schema>
             <table_name>follows</table_name>
@@ -938,7 +956,7 @@
             <column_name>from_user_id</column_name>
             <constraint_catalog></constraint_catalog>
             <constraint_schema>public</constraint_schema>
-            <constraint_name>follows__follows_users_id_fk</constraint_name>
+            <constraint_name>follows__follows_from_user_id_fkey</constraint_name>
             <ordinal_position>0</ordinal_position>
             <table_catalog></table_catalog>
             <table_schema>public</table_schema>
@@ -948,7 +966,7 @@
             <column_name>to_user_id</column_name>
             <constraint_catalog></constraint_catalog>
             <constraint_schema>public</constraint_schema>
-            <constraint_name>follows__follows_users_id_fk_2</constraint_name>
+            <constraint_name>follows__follows_to_user_id_fkey</constraint_name>
             <ordinal_position>0</ordinal_position>
             <table_catalog></table_catalog>
             <table_schema>public</table_schema>
@@ -1015,7 +1033,7 @@
         <referential_constraint>
             <constraint_catalog></constraint_catalog>
             <constraint_schema>public</constraint_schema>
-            <constraint_name>follows__follows_users_id_fk</constraint_name>
+            <constraint_name>follows__follows_from_user_id_fkey</constraint_name>
             <unique_constraint_catalog></unique_constraint_catalog>
             <unique_constraint_schema>public</unique_constraint_schema>
             <unique_constraint_name>users_pk</unique_constraint_name>
@@ -1023,7 +1041,7 @@
         <referential_constraint>
             <constraint_catalog></constraint_catalog>
             <constraint_schema>public</constraint_schema>
-            <constraint_name>follows__follows_users_id_fk_2</constraint_name>
+            <constraint_name>follows__follows_to_user_id_fkey</constraint_name>
             <unique_constraint_catalog></unique_constraint_catalog>
             <unique_constraint_schema>public</unique_constraint_schema>
             <unique_constraint_name>users_pk</unique_constraint_name>
@@ -1033,7 +1051,7 @@
         <index>
             <index_catalog></index_catalog>
             <index_schema>public</index_schema>
-            <index_name>article_to_tag_pk</index_name>
+            <index_name>article_to_tag_pkey</index_name>
             <table_catalog></table_catalog>
             <table_schema>public</table_schema>
             <table_name>article_to_tag</table_name>
@@ -1113,7 +1131,7 @@
         <index>
             <index_catalog></index_catalog>
             <index_schema>public</index_schema>
-            <index_name>favorited_articles_pk</index_name>
+            <index_name>favorited_articles_pkey</index_name>
             <table_catalog></table_catalog>
             <table_schema>public</table_schema>
             <table_name>favorited_articles</table_name>
@@ -1133,7 +1151,7 @@
         <index>
             <index_catalog></index_catalog>
             <index_schema>public</index_schema>
-            <index_name>follows_pk</index_name>
+            <index_name>follows_pkey</index_name>
             <table_catalog></table_catalog>
             <table_schema>public</table_schema>
             <table_name>follows</table_name>
@@ -1170,27 +1188,28 @@
             <is_unique>true</is_unique>
             <comment></comment>
         </index>
-        <index>
-            <index_catalog></index_catalog>
-            <index_schema>public</index_schema>
-            <index_name>users_token_uindex</index_name>
-            <table_catalog></table_catalog>
-            <table_schema>public</table_schema>
-            <table_name>users</table_name>
-            <is_unique>true</is_unique>
-            <comment></comment>
-        </index>
     </indexes>
     <index_column_usages>
         <index_column_usage>
             <index_catalog></index_catalog>
             <index_schema>public</index_schema>
-            <index_name>article_to_tag_pk</index_name>
+            <index_name>article_to_tag_pkey</index_name>
+            <table_catalog></table_catalog>
+            <table_schema>public</table_schema>
+            <table_name>article_to_tag</table_name>
+            <column_name>article_id</column_name>
+            <ordinal_position>1</ordinal_position>
+            <is_descending>false</is_descending>
+        </index_column_usage>
+        <index_column_usage>
+            <index_catalog></index_catalog>
+            <index_schema>public</index_schema>
+            <index_name>article_to_tag_pkey</index_name>
             <table_catalog></table_catalog>
             <table_schema>public</table_schema>
             <table_name>article_to_tag</table_name>
             <column_name>tag_id</column_name>
-            <ordinal_position>1</ordinal_position>
+            <ordinal_position>2</ordinal_position>
             <is_descending>false</is_descending>
         </index_column_usage>
         <index_column_usage>
@@ -1273,12 +1292,23 @@
         <index_column_usage>
             <index_catalog></index_catalog>
             <index_schema>public</index_schema>
-            <index_name>favorited_articles_pk</index_name>
+            <index_name>favorited_articles_pkey</index_name>
             <table_catalog></table_catalog>
             <table_schema>public</table_schema>
             <table_name>favorited_articles</table_name>
             <column_name>article_id</column_name>
             <ordinal_position>1</ordinal_position>
+            <is_descending>false</is_descending>
+        </index_column_usage>
+        <index_column_usage>
+            <index_catalog></index_catalog>
+            <index_schema>public</index_schema>
+            <index_name>favorited_articles_pkey</index_name>
+            <table_catalog></table_catalog>
+            <table_schema>public</table_schema>
+            <table_name>favorited_articles</table_name>
+            <column_name>user_id</column_name>
+            <ordinal_position>2</ordinal_position>
             <is_descending>false</is_descending>
         </index_column_usage>
         <index_column_usage>
@@ -1295,12 +1325,23 @@
         <index_column_usage>
             <index_catalog></index_catalog>
             <index_schema>public</index_schema>
-            <index_name>follows_pk</index_name>
+            <index_name>follows_pkey</index_name>
+            <table_catalog></table_catalog>
+            <table_schema>public</table_schema>
+            <table_name>follows</table_name>
+            <column_name>from_user_id</column_name>
+            <ordinal_position>1</ordinal_position>
+            <is_descending>false</is_descending>
+        </index_column_usage>
+        <index_column_usage>
+            <index_catalog></index_catalog>
+            <index_schema>public</index_schema>
+            <index_name>follows_pkey</index_name>
             <table_catalog></table_catalog>
             <table_schema>public</table_schema>
             <table_name>follows</table_name>
             <column_name>to_user_id</column_name>
-            <ordinal_position>1</ordinal_position>
+            <ordinal_position>2</ordinal_position>
             <is_descending>false</is_descending>
         </index_column_usage>
         <index_column_usage>
@@ -1333,17 +1374,6 @@
             <table_schema>public</table_schema>
             <table_name>users</table_name>
             <column_name>id</column_name>
-            <ordinal_position>1</ordinal_position>
-            <is_descending>false</is_descending>
-        </index_column_usage>
-        <index_column_usage>
-            <index_catalog></index_catalog>
-            <index_schema>public</index_schema>
-            <index_name>users_token_uindex</index_name>
-            <table_catalog></table_catalog>
-            <table_schema>public</table_schema>
-            <table_name>users</table_name>
-            <column_name>token</column_name>
             <ordinal_position>1</ordinal_position>
             <is_descending>false</is_descending>
         </index_column_usage>

@@ -10,7 +10,6 @@ class UserSigninService(
     private val passwordHasher: PasswordHasher,
     private val tokenCreator: TokenCreator
 ) {
-
     fun execute(request: UserSigninRequest): UserResponse {
         val user = users.byEmail(request.email) ?: throw InvalidSigninException()
 
@@ -20,9 +19,6 @@ class UserSigninService(
 
         val token = tokenCreator.createFor(user.id)
 
-        val userWithToken = user.copy(token = token)
-        users.update(userWithToken)
-
-        return UserResponse.fromUser(userWithToken)
+        return UserResponse.fromUser(user, token)
     }
 }

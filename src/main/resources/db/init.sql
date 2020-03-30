@@ -9,7 +9,6 @@ create table if not exists users
             primary key,
     email text not null,
     password text not null,
-    token text,
     username text,
     bio text,
     image text
@@ -39,9 +38,6 @@ create unique index if not exists articles_slug_uindex
 
 create unique index if not exists users_email_uindex
     on users (email);
-
-create unique index if not exists users_token_uindex
-    on users (token);
 
 create table if not exists comments
 (

@@ -30,10 +30,7 @@ class UserSignupService(
         val newUser = users.insert(user)
 
         val token = tokenCreator.createFor(newUser.id)
-        val userWithToken = newUser.copy(token = token)
 
-        users.update(userWithToken)
-
-        return UserResponse.fromUser(userWithToken)
+        return UserResponse.fromUser(newUser, token)
     }
 }

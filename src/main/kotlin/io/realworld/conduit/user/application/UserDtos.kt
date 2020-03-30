@@ -15,10 +15,10 @@ data class UserResponse(
     val image: String?
 ) {
     companion object {
-        fun fromUser(user: User) =
+        fun fromUser(user: User, token: String) =
             UserResponse(
                 email = user.email,
-                token = user.mustHaveToken(),
+                token = token,
                 username = user.username,
                 bio = user.bio,
                 image = user.image
@@ -46,7 +46,8 @@ data class UserSignupRequest(
 )
 
 data class ViewCurrentUserRequest(
-    val userId: UserId
+    val userId: UserId,
+    val token: String
 )
 
 data class UpdateUserRequestBody(

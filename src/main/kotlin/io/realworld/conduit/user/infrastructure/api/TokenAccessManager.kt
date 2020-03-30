@@ -7,8 +7,6 @@ import io.javalin.http.Handler
 import io.javalin.http.UnauthorizedResponse
 import io.realworld.conduit.user.domain.TokenVerifier
 
-private const val AUTHORIZATION_HEADER = "Authorization"
-
 internal enum class Roles : Role {
     ANYONE, AUTH
 }
@@ -17,11 +15,9 @@ class TokenAccessManager(private val tokenVerifier: TokenVerifier) : AccessManag
 
     override fun manage(handler: Handler, ctx: Context, permittedRoles: MutableSet<Role>) {
 
-        val authorization = ctx.header(AUTHORIZATION_HEADER)
+        val token = ctx.token()
 
-        val tokenInfo = authorization?.let {
-            tokenVerifier.verify(it.replace("Token ", ""))
-        }
+        val tokenInfo = token?.let { tokenVerifier.verify(it) }
 
         val isPublic = permittedRoles.size == 1 && permittedRoles.first() == Roles.ANYONE
 

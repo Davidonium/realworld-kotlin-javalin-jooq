@@ -11,3 +11,13 @@ fun Context.requireCurrentUserId(): UserId {
 fun Context.currentUserId(): UserId? {
     return attribute("userId")
 }
+
+private const val AUTHORIZATION_HEADER = "Authorization"
+
+fun Context.token(): String? {
+    return header(AUTHORIZATION_HEADER)?.replace("Token ", "")
+}
+
+fun Context.requireToken(): String {
+    return token() ?: throw ConduitException("Token is missing from the request")
+}

@@ -4,49 +4,119 @@ import io.realworld.conduit.article.domain.Article
 import io.realworld.conduit.article.domain.ArticleFilters
 import io.realworld.conduit.article.domain.ArticleId
 import io.realworld.conduit.article.domain.ArticleRepository
+import io.realworld.conduit.article.domain.Tag
 import io.realworld.conduit.generated.database.Tables.ARTICLES
 import io.realworld.conduit.generated.database.Tables.ARTICLE_TO_TAG
+import io.realworld.conduit.generated.database.Tables.FAVORITED_ARTICLES
 import io.realworld.conduit.generated.database.Tables.TAGS
 import io.realworld.conduit.generated.database.Tables.USERS
 import io.realworld.conduit.profile.infrastructure.persistence.profileFromRecord
+import org.jooq.Condition
 import org.jooq.DSLContext
 import org.jooq.Record
+import org.jooq.Result
+import org.jooq.Table
 import org.jooq.impl.DSL
 
 class JooqArticleRepository(private val ctx: DSLContext) : ArticleRepository {
     override fun bySlug(slug: String): Article? {
-        return ctx
+        val article = ctx
             .select()
             .from(ARTICLES)
-            .join(USERS).onKey()
-            .fetchOne(::articleFromRecord)
+            .join(USERS).on(USERS.ID.eq(ARTICLES.AUTHOR_ID))
+            .where(ARTICLES.SLUG.eq(slug))
+            .fetchOne()
+            ?: return null
+
+        val tags = ctx
+            .select(*TAGS.fields())
+            .from(ARTICLE_TO_TAG)
+            .join(TAGS).on(TAGS.ID.eq(ARTICLE_TO_TAG.TAG_ID))
+            .where(ARTICLE_TO_TAG.ARTICLE_ID.eq(article[ARTICLES.ID]))
+            .fetch()
+
+        return mapArticle(article, tags)
     }
 
     override fun recent(filters: ArticleFilters): List<Article> {
+        var from = ARTICLES
+            .join(USERS).on(USERS.ID.eq(ARTICLES.AUTHOR_ID))
 
-        val tagQuery = ctx
-            .select(TAGS.NAME)
-            .from(TAGS)
-            .join(ARTICLE_TO_TAG).on(ARTICLE_TO_TAG.TAG_ID.eq(TAGS.ID))
-            .where(ARTICLE_TO_TAG.ARTICLE_ID.eq(ARTICLES.ID))
-            .asField<IntArray>("tags")
+        var where: Condition = DSL.noCondition()
 
-        return ctx
+        if (filters.author != null) {
+            where = where.and(USERS.USERNAME.eq(filters.author))
+        }
+
+        if (filters.tag != null) {
+            from = from
+                .join(ARTICLE_TO_TAG).on(ARTICLE_TO_TAG.ARTICLE_ID.eq(ARTICLES.ID))
+                .join(TAGS).on(TAGS.ID.eq(ARTICLE_TO_TAG.TAG_ID)).and(TAGS.NAME.eq(filters.tag))
+        }
+
+        if (filters.favorited != null) {
+            val favoritedUsers = USERS.`as`("fu")
+            from = from
+                .join(FAVORITED_ARTICLES).on(FAVORITED_ARTICLES.ARTICLE_ID.eq(ARTICLES.ID))
+                .join(favoritedUsers).on(favoritedUsers.ID.eq(FAVORITED_ARTICLES.USER_ID))
+            where = where.and(favoritedUsers.USERNAME.eq(filters.favorited))
+        }
+
+        val articles = ctx
             .select(
                 *ARTICLES.fields(),
-                *USERS.fields(),
-                tagQuery
+                *USERS.fields()
             )
-            .from(ARTICLES)
-            .join(USERS).onKey()
-            .fetch(::articleFromRecord)
+            .from(from)
+            .where(where)
+            .orderBy(ARTICLES.CREATED_AT.desc())
+            .limit(filters.limit)
+            .offset(filters.offset)
+            .fetch()
+
+        // fetched separatedly to avoid cartesian product of body and description
+        val tags = ctx
+            .select(ARTICLE_TO_TAG.ARTICLE_ID, *TAGS.fields())
+            .from(ARTICLE_TO_TAG)
+            .join(TAGS).on(TAGS.ID.eq(ARTICLE_TO_TAG.TAG_ID))
+            .where(ARTICLE_TO_TAG.ARTICLE_ID.`in`(articles.map { it[ARTICLES.ID] }))
+            .fetchGroups(ARTICLE_TO_TAG.ARTICLE_ID)
+
+        return articles.map {
+            mapArticle(it, tags[it[ARTICLES.ID]] ?: ctx.newResult())
+        }
     }
 
     override fun recentCount(filters: ArticleFilters): Int {
+
+        var from: Table<out Record> = ARTICLES
+
+        var where = DSL.noCondition()
+
+        if (filters.author != null) {
+            from = from.join(USERS).on(USERS.ID.eq(ARTICLES.AUTHOR_ID))
+            where = where.and(USERS.USERNAME.eq(filters.author))
+        }
+
+        if (filters.tag != null) {
+            from = from
+                .join(ARTICLE_TO_TAG).on(ARTICLE_TO_TAG.ARTICLE_ID.eq(ARTICLES.ID))
+                .join(TAGS).on(TAGS.ID.eq(ARTICLE_TO_TAG.TAG_ID)).and(TAGS.NAME.eq(filters.tag))
+        }
+
+        if (filters.favorited != null) {
+            val favoritedUsers = USERS.`as`("fu")
+            from = from
+                .join(FAVORITED_ARTICLES).on(FAVORITED_ARTICLES.ARTICLE_ID.eq(ARTICLES.ID))
+                .join(favoritedUsers).on(favoritedUsers.ID.eq(FAVORITED_ARTICLES.USER_ID))
+
+            where = where.and(favoritedUsers.USERNAME.eq(filters.favorited))
+        }
+
         return ctx
             .selectCount()
-            .from(ARTICLES)
-            .join(USERS).onKey()
+            .from(from)
+            .where(where)
             .fetchSingle(0, Int::class.java)
     }
 
@@ -81,17 +151,18 @@ class JooqArticleRepository(private val ctx: DSLContext) : ArticleRepository {
             }
         }
     }
-}
 
-fun articleFromRecord(r: Record): Article {
-    return Article(
-        id = ArticleId(r[ARTICLES.ID]),
-        slug = r[ARTICLES.SLUG],
-        title = r[ARTICLES.TITLE],
-        description = r[ARTICLES.DESCRIPTION],
-        body = r[ARTICLES.BODY],
-        createdAt = r[ARTICLES.CREATED_AT],
-        updatedAt = r[ARTICLES.UPDATED_AT],
-        author = profileFromRecord(r)
-    )
+    private fun mapArticle(r: Record, tagRecords: Result<Record>): Article {
+        return Article(
+            id = ArticleId(r[ARTICLES.ID]),
+            slug = r[ARTICLES.SLUG],
+            title = r[ARTICLES.TITLE],
+            description = r[ARTICLES.DESCRIPTION],
+            body = r[ARTICLES.BODY],
+            createdAt = r[ARTICLES.CREATED_AT],
+            updatedAt = r[ARTICLES.UPDATED_AT],
+            author = profileFromRecord(r),
+            tags = tagRecords.map { Tag(it[TAGS.ID], it[TAGS.NAME]) }
+        )
+    }
 }
