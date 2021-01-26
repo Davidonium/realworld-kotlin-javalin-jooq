@@ -4,6 +4,7 @@ import io.realworld.conduit.generated.database.Tables.USERS
 import io.realworld.conduit.user.domain.User
 import io.realworld.conduit.user.domain.UserId
 import io.realworld.conduit.user.domain.UserRepository
+import io.realworld.conduit.user.domain.exception.UserNotFoundException
 import org.jooq.DSLContext
 import org.jooq.Record
 
@@ -13,32 +14,32 @@ class JooqUserRepository(private val ctx: DSLContext) : UserRepository {
         return ctx.select()
             .from(USERS)
             .where(USERS.ID.eq(userId.value))
-            .fetchOne(::userFromRecord)
+            .fetchOne(::userFromRecord) ?: throw UserNotFoundException()
     }
 
     override fun byEmail(email: String): User? {
         return ctx.select()
             .from(USERS)
             .where(USERS.EMAIL.eq(email))
-            .fetchOne(::userFromRecord)
+            .fetchOne(::userFromRecord) ?: throw UserNotFoundException()
     }
 
     override fun insert(user: User): User {
         val id = ctx.insertInto(USERS)
-                .set(USERS.EMAIL, user.email)
-                .set(USERS.USERNAME, user.username)
-                .set(USERS.PASSWORD, user.password)
+            .set(USERS.EMAIL, user.email)
+            .set(USERS.USERNAME, user.username)
+            .set(USERS.PASSWORD, user.password)
             .returning(USERS.ID)
-            .fetchOne()[USERS.ID]
+            .fetchOne()!![USERS.ID]
 
         return user.withId(UserId(id))
     }
 
     override fun update(user: User) {
         ctx.update(USERS)
-                .set(USERS.USERNAME, user.username)
-                .set(USERS.BIO, user.bio)
-                .set(USERS.IMAGE, user.image)
+            .set(USERS.USERNAME, user.username)
+            .set(USERS.BIO, user.bio)
+            .set(USERS.IMAGE, user.image)
             .where(USERS.ID.eq(user.id.value))
             .execute()
     }

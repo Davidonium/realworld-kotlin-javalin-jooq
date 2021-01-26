@@ -117,7 +117,7 @@ class JooqArticleRepository(private val ctx: DSLContext) : ArticleRepository {
             .selectCount()
             .from(from)
             .where(where)
-            .fetchSingle(0, Int::class.java)
+            .fetchSingle().value1()
     }
 
     override fun insert(article: Article): Article {

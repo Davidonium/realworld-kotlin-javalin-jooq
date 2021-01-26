@@ -13,7 +13,8 @@ class UserSignupHandlerIntegrationTest {
 
     @Test
     fun `a user can sign up successfully`() {
-        val body = """{
+        val body =
+            """{
   "user": {
     "username": "david",
     "email": "david.hernando91@gmail.com",

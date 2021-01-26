@@ -33,8 +33,8 @@ val userModule = module {
     single { Algorithm.HMAC256("conduit") }
     single<JWTVerifier> {
         JWT.require(get())
-        .withIssuer("conduit")
-        .build()
+            .withIssuer("conduit")
+            .build()
     }
     single { TokenAccessManager(get()) }
     single<PasswordHasher> { BCryptPasswordHasher() }

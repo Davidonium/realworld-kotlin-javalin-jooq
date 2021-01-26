@@ -13,28 +13,34 @@ class ExceptionMapper {
             logger.error("Unhandled exception in request: ${ctx.method()} ${ctx.fullUrl()}", e)
             val error = HttpStatus.Code.INTERNAL_SERVER_ERROR
             ctx.status(error.code)
-            ctx.json(ApiError(
-                status = error.code.toString(),
-                message = error.message
-            ))
+            ctx.json(
+                ApiError(
+                    status = error.code.toString(),
+                    message = error.message
+                )
+            )
         }
 
         app.exception(ResourceNotFoundException::class.java) { _, ctx ->
             val error = HttpStatus.Code.NOT_FOUND
             ctx.status(error.code)
-            ctx.json(ApiError(
-                status = error.code.toString(),
-                message = error.message
-            ))
+            ctx.json(
+                ApiError(
+                    status = error.code.toString(),
+                    message = error.message
+                )
+            )
         }
 
         app.error(404) { ctx ->
             val error = HttpStatus.Code.NOT_FOUND
             ctx.status(error.code)
-            ctx.json(ApiError(
-                status = error.code.toString(),
-                message = error.message
-            ))
+            ctx.json(
+                ApiError(
+                    status = error.code.toString(),
+                    message = error.message
+                )
+            )
         }
     }
 }

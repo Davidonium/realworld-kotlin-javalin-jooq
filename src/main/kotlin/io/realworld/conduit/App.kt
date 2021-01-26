@@ -5,10 +5,10 @@ import io.realworld.conduit.article.infrastructure.injection.articleModule
 import io.realworld.conduit.profile.infrastructure.injection.profileModule
 import io.realworld.conduit.shared.infrastructure.injection.mainModule
 import io.realworld.conduit.user.infrastructure.injection.userModule
-import java.util.TimeZone
-import javax.sql.DataSource
 import org.koin.core.error.NoPropertyFileFoundException
 import org.koin.dsl.koinApplication
+import java.util.TimeZone
+import javax.sql.DataSource
 
 fun main() {
     App().start()
@@ -30,12 +30,14 @@ class App(
         }
         environmentProperties()
         properties(properties)
-        modules(listOf(
-            mainModule,
-            articleModule,
-            userModule,
-            profileModule
-        ))
+        modules(
+            listOf(
+                mainModule,
+                articleModule,
+                userModule,
+                profileModule
+            )
+        )
     }
 
     private val container = app.koin

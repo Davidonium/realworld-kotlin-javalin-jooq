@@ -24,7 +24,7 @@ class JooqTagRepository(private val ctx: DSLContext) : TagRepository {
         val id = ctx.insertInto(TAGS)
             .set(TAGS.NAME, tag.name)
             .returning()
-            .fetchOne().id
+            .fetchOne()!!.id
 
         return tag.copy(id = id)
     }
