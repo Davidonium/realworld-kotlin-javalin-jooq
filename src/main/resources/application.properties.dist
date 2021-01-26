@@ -1,4 +1,0 @@
-DB_URL=jdbc:postgresql://localhost:5444/realworld
-DB_USER=user
-DB_PASSWORD=password
-APP_PORT=7000

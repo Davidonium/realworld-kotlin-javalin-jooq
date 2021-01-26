@@ -3,6 +3,8 @@ package io.realworld.conduit.shared.infrastructure.injection
 import com.fasterxml.jackson.databind.SerializationFeature
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
+import com.typesafe.config.Config
+import com.typesafe.config.ConfigFactory
 import com.zaxxer.hikari.HikariDataSource
 import io.javalin.Javalin
 import io.javalin.plugin.json.JavalinJackson
@@ -27,9 +29,9 @@ import javax.sql.DataSource
 val mainModule = module {
     single<DataSource> {
         HikariDataSource().apply {
-            jdbcUrl = getProperty("DB_URL")
-            username = getProperty("DB_USER")
-            password = getProperty("DB_PASSWORD")
+            jdbcUrl = get<Config>().getString("db.url")
+            username = get<Config>().getString("db.user")
+            password = get<Config>().getString("db.password")
             driverClassName = "org.postgresql.Driver"
             addDataSourceProperty("cachePrepStmts", "true")
             addDataSourceProperty("prepStmtCacheSize", "250")
@@ -62,7 +64,7 @@ val mainModule = module {
             get<Router>().setupRoutes(it)
             get<ExceptionMapper>().map(it)
 
-            it.server()?.serverPort = getProperty("APP_PORT")
+            it.server()?.serverPort = get<Config>().getInt("app.port")
         }
     }
     single { ExceptionMapper() }
@@ -81,5 +83,12 @@ val mainModule = module {
             get(),
             get()
         )
+    }
+    single<Config> {
+        val default = ConfigFactory.parseResources("application.conf")
+
+        ConfigFactory
+            .parseResources("application-local.conf")
+            .withFallback(default)
     }
 }

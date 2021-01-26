@@ -42,7 +42,7 @@ val jackson_version = "2.10.2"
 val javalin_version = "3.7.0"
 val jooq_version = "3.14.1"
 val junit_version = "5.5.1"
-val koin_version = "2.0.1"
+val koin_version = "2.2.2"
 val kotlin_version = "1.4.21"
 val logback_version = "1.2.3"
 val mockk_version = "1.10.3"
@@ -50,8 +50,9 @@ val postgres_driver_version = "42.2.6"
 val rest_assured_version = "4.1.2"
 val slugify_version = "2.4"
 val spring_jdbc_version = "5.2.4.RELEASE"
-val testcontainers_postgresql_version = "1.12.1"
+val testcontainers_postgresql_version = "1.15.1"
 val reactive_streams_version = "1.0.3"
+val typesafe_config_version = "1.4.1"
 
 dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect:$kotlin_version")
@@ -70,6 +71,7 @@ dependencies {
     implementation("com.github.slugify:slugify:$slugify_version")
     implementation("org.springframework:spring-jdbc:$spring_jdbc_version")
     implementation("org.reactivestreams:reactive-streams:$reactive_streams_version")
+    implementation("com.typesafe:config:$typesafe_config_version")
 
     testImplementation("io.mockk:mockk:$mockk_version")
     testImplementation("io.rest-assured:rest-assured:$rest_assured_version")

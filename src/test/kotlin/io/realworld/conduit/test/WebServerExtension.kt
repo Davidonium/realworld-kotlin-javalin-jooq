@@ -12,7 +12,7 @@ class WebServerExtension : BeforeAllCallback {
     override fun beforeAll(context: ExtensionContext) {
         val store = rootStore(context)
         store.getOrComputeIfAbsent("app") {
-            val databaseContainer = PostgreSQLContainer<Nothing>()
+            val databaseContainer = KPostgreSQLContainer("postgres:11.5")
 
             databaseContainer.start()
             val properties = mapOf(
@@ -36,4 +36,6 @@ class WebServerExtension : BeforeAllCallback {
     private fun rootStore(context: ExtensionContext): Store {
         return context.root.getStore(Namespace.create(WebServerTest::class.java))
     }
+
+    class KPostgreSQLContainer(imageName: String) : PostgreSQLContainer<KPostgreSQLContainer>(imageName)
 }

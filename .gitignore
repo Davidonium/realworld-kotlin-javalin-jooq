@@ -3,4 +3,4 @@
 out
 build
 src/main/generated
-application.properties
+application-local.conf

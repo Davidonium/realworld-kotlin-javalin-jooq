@@ -1,5 +1,3 @@
-create database realworld;
-
 alter database realworld set timezone to 'utc';
 
 create table if not exists users

@@ -19,6 +19,7 @@ Hexagonal architecture realworld implementation
 
 ```bash
 $ docker-compose up -d
+$ cp src/main/resources/application-local.conf.dist src/main/resources/application-local.conf
 $ ./gradlew jooq
 $ ./gradlew run
 ```
