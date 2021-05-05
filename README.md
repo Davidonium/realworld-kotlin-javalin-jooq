@@ -6,7 +6,7 @@
 ### [Demo](https://github.com/gothinkster/realworld) | [RealWorld](https://github.com/gothinkster/realworld)
 
 
-This codebase was created to demonstrate a fully fledged fullstack application built with **Kotlin + http4k + Jooq** including CRUD operations, authentication, routing, pagination, and more.
+This codebase was created to demonstrate a fully fledged fullstack application built with **Kotlin + javalin + Jooq** including CRUD operations, authentication, routing, pagination, and more.
 
 For more information on how to this works with other frontends/backends, head over to the [RealWorld](https://github.com/gothinkster/realworld) repo.
 
