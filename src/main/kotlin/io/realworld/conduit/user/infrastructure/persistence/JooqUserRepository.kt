@@ -21,7 +21,7 @@ class JooqUserRepository(private val ctx: DSLContext) : UserRepository {
         return ctx.select()
             .from(USERS)
             .where(USERS.EMAIL.eq(email))
-            .fetchOne(::userFromRecord) ?: throw UserNotFoundException()
+            .fetchOne(::userFromRecord)
     }
 
     override fun insert(user: User): User {
