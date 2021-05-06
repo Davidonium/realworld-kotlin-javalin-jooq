@@ -40,7 +40,7 @@ val jackson_version = "2.10.2"
 val javalin_version = "3.7.0"
 val jooq_version = "3.14.1"
 val junit_version = "5.5.1"
-val koin_version = "2.2.2"
+val koin_version = "3.0.1"
 val kotlin_version = "1.4.21"
 val logback_version = "1.2.3"
 val mockk_version = "1.10.3"
@@ -64,7 +64,7 @@ dependencies {
     implementation("com.zaxxer:HikariCP:$hikaricp_version")
     implementation("io.javalin:javalin:$javalin_version")
     implementation("org.jooq:jooq:$jooq_version")
-    implementation("org.koin:koin-core:$koin_version")
+    implementation("io.insert-koin:koin-core-jvm:$koin_version")
     implementation("org.postgresql:postgresql:$postgres_driver_version")
     implementation("com.github.slugify:slugify:$slugify_version")
     implementation("org.springframework:spring-jdbc:$spring_jdbc_version")
