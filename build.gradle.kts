@@ -33,50 +33,50 @@ sourceSets {
     }
 }
 
-val auth0_jwt_version = "3.10.0"
-val bcrypt_version = "0.9.0"
-val hikaricp_version = "3.4.1"
-val jackson_version = "2.10.2"
-val javalin_version = "3.7.0"
-val jooq_version = "3.14.1"
-val junit_version = "5.5.1"
-val koin_version = "3.0.1"
-val kotlin_version = "1.4.21"
-val logback_version = "1.2.3"
-val mockk_version = "1.10.3"
-val postgres_driver_version = "42.2.6"
-val rest_assured_version = "4.1.2"
-val slugify_version = "2.4"
-val spring_jdbc_version = "5.2.4.RELEASE"
-val testcontainers_postgresql_version = "1.15.1"
-val reactive_streams_version = "1.0.3"
-val typesafe_config_version = "1.4.1"
+val auth0JwtVersion = "3.10.0"
+val bcryptVersion = "0.9.0"
+val hikaricpVersion = "3.4.1"
+val jacksonVersion = "2.10.2"
+val javalinVersion = "3.13.6"
+val jooqVersion = "3.14.1"
+val junitVersion = "5.5.1"
+val koinVersion = "3.0.1"
+val kotlinVersion = "1.4.21"
+val logbackVersion = "1.2.3"
+val mockkVersion = "1.10.3"
+val postgresDriverVersion = "42.2.6"
+val restAssuredVersion = "4.1.2"
+val slugifyVersion = "2.4"
+val springJdbcVersion = "5.2.4.RELEASE"
+val testcontainersPostgresqlVersion = "1.15.1"
+val reactiveStreamsVersion = "1.0.3"
+val typesafeConfigVersion = "1.4.1"
 
 dependencies {
-    implementation("org.jetbrains.kotlin:kotlin-reflect:$kotlin_version")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version")
-    implementation("at.favre.lib:bcrypt:$bcrypt_version")
-    implementation("ch.qos.logback:logback-classic:$logback_version")
-    implementation("com.auth0:java-jwt:$auth0_jwt_version")
-    implementation("com.fasterxml.jackson.core:jackson-databind:$jackson_version")
-    implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jackson_version")
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:$jackson_version")
-    implementation("com.zaxxer:HikariCP:$hikaricp_version")
-    implementation("io.javalin:javalin:$javalin_version")
-    implementation("org.jooq:jooq:$jooq_version")
-    implementation("io.insert-koin:koin-core-jvm:$koin_version")
-    implementation("org.postgresql:postgresql:$postgres_driver_version")
-    implementation("com.github.slugify:slugify:$slugify_version")
-    implementation("org.springframework:spring-jdbc:$spring_jdbc_version")
-    implementation("org.reactivestreams:reactive-streams:$reactive_streams_version")
-    implementation("com.typesafe:config:$typesafe_config_version")
+    implementation("org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion")
+    implementation("at.favre.lib:bcrypt:$bcryptVersion")
+    implementation("ch.qos.logback:logback-classic:$logbackVersion")
+    implementation("com.auth0:java-jwt:$auth0JwtVersion")
+    implementation("com.fasterxml.jackson.core:jackson-databind:$jacksonVersion")
+    implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jacksonVersion")
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:$jacksonVersion")
+    implementation("com.zaxxer:HikariCP:$hikaricpVersion")
+    implementation("io.javalin:javalin:$javalinVersion")
+    implementation("org.jooq:jooq:$jooqVersion")
+    implementation("io.insert-koin:koin-core-jvm:$koinVersion")
+    implementation("org.postgresql:postgresql:$postgresDriverVersion")
+    implementation("com.github.slugify:slugify:$slugifyVersion")
+    implementation("org.springframework:spring-jdbc:$springJdbcVersion")
+    implementation("org.reactivestreams:reactive-streams:$reactiveStreamsVersion")
+    implementation("com.typesafe:config:$typesafeConfigVersion")
 
-    testImplementation("io.mockk:mockk:$mockk_version")
-    testImplementation("io.rest-assured:rest-assured:$rest_assured_version")
-    testImplementation("io.rest-assured:kotlin-extensions:$rest_assured_version")
-    testImplementation("org.jetbrains.kotlin:kotlin-test-junit5:$kotlin_version")
-    testImplementation("org.testcontainers:postgresql:$testcontainers_postgresql_version")
-    testImplementation("org.junit.jupiter:junit-jupiter:$junit_version")
+    testImplementation("io.mockk:mockk:$mockkVersion")
+    testImplementation("io.rest-assured:rest-assured:$restAssuredVersion")
+    testImplementation("io.rest-assured:kotlin-extensions:$restAssuredVersion")
+    testImplementation("org.jetbrains.kotlin:kotlin-test-junit5:$kotlinVersion")
+    testImplementation("org.testcontainers:postgresql:$testcontainersPostgresqlVersion")
+    testImplementation("org.junit.jupiter:junit-jupiter:$junitVersion")
 }
 
 tasks {
