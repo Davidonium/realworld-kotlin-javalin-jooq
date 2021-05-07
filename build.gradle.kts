@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 buildscript {
     repositories {
         mavenCentral()
@@ -9,7 +11,7 @@ buildscript {
 }
 
 plugins {
-    kotlin("jvm") version "1.4.21"
+    kotlin("jvm") version "1.5.0"
     application
     id("org.jlleitschuh.gradle.ktlint") version "9.4.1"
     id("com.github.johnrengelman.shadow") version "5.1.0"
@@ -20,7 +22,7 @@ version = "0.0.1-SNAPSHOT"
 java.sourceCompatibility = JavaVersion.VERSION_11
 
 application {
-    mainClassName = "io.realworld.conduit.AppKt"
+    mainClass.set("io.realworld.conduit.AppKt")
 }
 
 repositories {
@@ -41,7 +43,7 @@ val javalinVersion = "3.13.6"
 val jooqVersion = "3.14.1"
 val junitVersion = "5.5.1"
 val koinVersion = "3.0.1"
-val kotlinVersion = "1.4.21"
+val kotlinVersion = "1.5.0"
 val logbackVersion = "1.2.3"
 val mockkVersion = "1.10.3"
 val postgresDriverVersion = "42.2.6"
@@ -117,7 +119,7 @@ tasks {
             org.jooq.codegen.GenerationTool.generate(config)
         }
     }
-    withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
+    withType<KotlinCompile> {
         kotlinOptions {
             freeCompilerArgs = listOf("-Xjsr305=strict")
             jvmTarget = "11"
