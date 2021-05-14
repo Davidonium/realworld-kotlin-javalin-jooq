@@ -94,7 +94,7 @@ tasks {
 
         inputs.file(file("src/main/resources/db/jooq/information_schema.xml"))
         inputs.file(file("src/main/resources/db/jooq/jooq.xml"))
-        outputs.dir(file("src/main/generated/java"))
+        outputs.dir(file("src/main/generated/kotlin"))
 
         doLast {
             val config = file("src/main/resources/db/jooq/jooq.xml")
