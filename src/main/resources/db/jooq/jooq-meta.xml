@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<configuration xmlns="http://www.jooq.org/xsd/jooq-codegen-3.12.0.xsd">
+<configuration xmlns="http://www.jooq.org/xsd/jooq-codegen-3.14.0.xsd">
     <jdbc>
         <driver>org.postgresql.Driver</driver>
-        <url>jdbc:postgresql://localhost:5555/realworld</url>
-        <user>rw</user>
-        <password>rw</password>
+        <url>%database_url%</url>
+        <user>%database_user%</user>
+        <password>%database_password%</password>
     </jdbc>
 
     <generator>

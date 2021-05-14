@@ -1,7 +1,6 @@
 package io.realworld.conduit.profile.infrastructure.persistence
 
-import io.realworld.conduit.generated.database.Tables.FOLLOWS
-import io.realworld.conduit.generated.database.Tables.USERS
+import io.realworld.conduit.generated.database.tables.references.*
 import io.realworld.conduit.profile.domain.Profile
 import io.realworld.conduit.profile.domain.ProfileRepository
 import io.realworld.conduit.profile.domain.exception.ProfileNotFoundException
@@ -36,7 +35,7 @@ class JooqProfileRepository(private val ctx: DSLContext) : ProfileRepository {
 fun profileFromRecord(r: Record): Profile {
     return Profile(
         id = UserId(r[USERS.ID]),
-        username = r[USERS.USERNAME],
+        username = r[USERS.USERNAME]!!,
         bio = r[USERS.BIO],
         image = r[USERS.IMAGE]
     )

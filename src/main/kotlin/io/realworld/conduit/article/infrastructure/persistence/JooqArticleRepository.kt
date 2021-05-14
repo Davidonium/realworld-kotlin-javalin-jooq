@@ -5,11 +5,7 @@ import io.realworld.conduit.article.domain.ArticleFilters
 import io.realworld.conduit.article.domain.ArticleId
 import io.realworld.conduit.article.domain.ArticleRepository
 import io.realworld.conduit.article.domain.Tag
-import io.realworld.conduit.generated.database.Tables.ARTICLES
-import io.realworld.conduit.generated.database.Tables.ARTICLE_TO_TAG
-import io.realworld.conduit.generated.database.Tables.FAVORITED_ARTICLES
-import io.realworld.conduit.generated.database.Tables.TAGS
-import io.realworld.conduit.generated.database.Tables.USERS
+import io.realworld.conduit.generated.database.tables.references.*
 import io.realworld.conduit.profile.infrastructure.persistence.profileFromRecord
 import org.jooq.Condition
 import org.jooq.DSLContext
@@ -63,7 +59,7 @@ class JooqArticleRepository(private val ctx: DSLContext) : ArticleRepository {
         }
 
         val articles = ctx
-            .select(
+            .selectDistinct(
                 *ARTICLES.fields(),
                 *USERS.fields()
             )
@@ -131,7 +127,7 @@ class JooqArticleRepository(private val ctx: DSLContext) : ArticleRepository {
         }
         articleRecord.store()
 
-        return article.withId(id = ArticleId(articleRecord.id))
+        return article.withId(id = ArticleId(articleRecord.id!!))
     }
 
     override fun assignTags(article: Article) {
@@ -154,15 +150,15 @@ class JooqArticleRepository(private val ctx: DSLContext) : ArticleRepository {
 
     private fun mapArticle(r: Record, tagRecords: Result<Record>): Article {
         return Article(
-            id = ArticleId(r[ARTICLES.ID]),
-            slug = r[ARTICLES.SLUG],
-            title = r[ARTICLES.TITLE],
-            description = r[ARTICLES.DESCRIPTION],
-            body = r[ARTICLES.BODY],
-            createdAt = r[ARTICLES.CREATED_AT],
-            updatedAt = r[ARTICLES.UPDATED_AT],
+            id = ArticleId(r[ARTICLES.ID]!!),
+            slug = r[ARTICLES.SLUG]!!,
+            title = r[ARTICLES.TITLE]!!,
+            description = r[ARTICLES.DESCRIPTION]!!,
+            body = r[ARTICLES.BODY]!!,
+            createdAt = r[ARTICLES.CREATED_AT]!!,
+            updatedAt = r[ARTICLES.UPDATED_AT]!!,
             author = profileFromRecord(r),
-            tags = tagRecords.map { Tag(it[TAGS.ID], it[TAGS.NAME]) }
+            tags = tagRecords.map { Tag(it[TAGS.ID]!!, it[TAGS.NAME]!!) }
         )
     }
 }

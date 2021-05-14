@@ -14,15 +14,18 @@ plugins {
     kotlin("jvm") version "1.5.0"
     application
     id("org.jlleitschuh.gradle.ktlint") version "9.4.1"
-    id("com.github.johnrengelman.shadow") version "5.1.0"
+    id("com.github.johnrengelman.shadow") version "6.1.0"
 }
 
 group = "com.davidonium"
 version = "0.0.1-SNAPSHOT"
 java.sourceCompatibility = JavaVersion.VERSION_11
 
+val appMainClassName = "io.realworld.conduit.AppKt"
+project.setProperty("mainClassName", appMainClassName)
+
 application {
-    mainClass.set("io.realworld.conduit.AppKt")
+    mainClass.set(appMainClassName)
 }
 
 repositories {
@@ -31,7 +34,7 @@ repositories {
 
 sourceSets {
     main {
-        java.srcDir("src/main/generated/java")
+        java.srcDir("src/main/generated/kotlin")
     }
 }
 
@@ -89,12 +92,12 @@ tasks {
         group = "Jooq"
         description = "Generate jooq classes from the xml schema generated from the jooqxml task"
 
-        inputs.file(file("${project.projectDir}/src/main/resources/db/jooq/information_schema.xml"))
-        inputs.file(file("${project.projectDir}/src/main/resources/db/jooq/jooq.xml"))
-        outputs.dir(file("${project.projectDir}/src/main/generated/java"))
+        inputs.file(file("src/main/resources/db/jooq/information_schema.xml"))
+        inputs.file(file("src/main/resources/db/jooq/jooq.xml"))
+        outputs.dir(file("src/main/generated/java"))
 
         doLast {
-            val config = file("${project.projectDir}/src/main/resources/db/jooq/jooq.xml")
+            val config = file("src/main/resources/db/jooq/jooq.xml")
                 .readText()
                 .replace("%project_dir%", project.projectDir.toString())
 
@@ -106,10 +109,10 @@ tasks {
         description = "Generate jooq xml schema from database"
 
         doLast {
-            val dbUrl = System.getenv("DB_URL")
-            val dbUser = System.getenv("DB_USER")
-            val dbPwd = System.getenv("DB_PASSWORD")
-            val config = file("${project.projectDir}/src/main/resources/db/jooq/jooq-meta.xml")
+            val dbUrl = System.getenv("DB_URL") ?: "jdbc:postgresql://localhost:5555/realworld"
+            val dbUser = System.getenv("DB_USER") ?: "rw"
+            val dbPwd = System.getenv("DB_PASSWORD") ?: "rw"
+            val config = file("src/main/resources/db/jooq/jooq-meta.xml")
                 .readText()
                 .replace("%database_url%", dbUrl)
                 .replace("%database_user%", dbUser)
@@ -127,7 +130,7 @@ tasks {
         dependsOn(getByName("jooq"))
     }
     clean {
-        delete("${project.projectDir}/src/main/generated")
+        delete("src/main/generated")
     }
 }
 
